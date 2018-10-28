@@ -3,8 +3,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers/rootReducer';
 import firebase from '../config/firebase';
+import rootSaga from '../sagas/';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const rrfConfig = {
   userProfile: 'users',
@@ -14,7 +18,7 @@ const rrfConfig = {
 };
 
 export const configureStore = preloadedState => {
-  const middlewares = [thunk.withExtraArgument({ getFirebase, getFirestore })];
+  const middlewares = [sagaMiddleware, thunk.withExtraArgument({ getFirebase, getFirestore })];
   const middlewareEnhancer = applyMiddleware(...middlewares);
 
   const storeEnhancers = [middlewareEnhancer];
@@ -22,7 +26,8 @@ export const configureStore = preloadedState => {
   const composedEnhancer = composeWithDevTools(
     ...storeEnhancers,
     reactReduxFirebase(firebase, rrfConfig),
-    reduxFirestore(firebase)
+    reduxFirestore(firebase),
+   
   );
 
   const store = createStore(rootReducer, preloadedState, composedEnhancer);
@@ -36,5 +41,8 @@ export const configureStore = preloadedState => {
     }
   }
 
+
+  // runSaga: 
+  sagaMiddleware.run(rootSaga)
   return store;
 };

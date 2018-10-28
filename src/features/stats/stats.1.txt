@@ -1,0 +1,151 @@
+import _ from 'lodash'
+import React, { Component } from 'react'
+import { Table } from 'semantic-ui-react'
+import { connect } from 'react-redux';
+import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import LoadingComponent from '../../../src/app/layout/LoadingComponent';
+
+
+const tableData = [
+  { name: 'John', ledmain: 15, deviceid: 'Male' },
+  { name: 'Amber', ledmain: 40, deviceid: 'Female' },
+  { name: 'Leslie', ledmain: 25, deviceid: 'Female' },
+  { name: 'Ben', ledmain: 70, deviceid: 'Male' },
+]
+
+const mapState = state => ({
+  // tasks: state.firestore.ordered.tasks
+  tasks: state.firestore.data.tasks
+});
+
+class stats extends Component {
+  state = {
+    column: null,
+    data: tableData,
+    direction: null,
+  }
+
+
+  // componentDidMount() {
+  //   db.collection("tasks").get().then(function(querySnapshot) {
+  //     querySnapshot.forEach(function(doc) {
+  //         // doc.data() is never undefined for query doc snapshots
+  //         console.log(doc.id, " => ", doc.data());
+  //     });
+  // });
+  
+ // }
+
+  handleSort = clickedColumn => () => {
+    const { column, data, direction } = this.state
+
+    if (column !== clickedColumn) {
+      this.setState({
+        column: clickedColumn,
+        data: _.sortBy(data, [clickedColumn]),
+        direction: 'ascending',
+      })
+
+      return
+    }
+
+    this.setState({
+      data: data.reverse(),
+      direction: direction === 'ascending' ? 'descending' : 'ascending',
+    })
+  }
+
+  render() {
+
+    const { tasks } = this.props;
+    const { column, data, direction } = this.state
+
+    if (!isLoaded(tasks) || isEmpty(tasks)) return <LoadingComponent inverted={true} />;
+
+    // console.log({tasks}) ;
+
+   //  console.log(" length : " , tasks.length ) ;
+    // test map function here : 
+
+    // Object.keys(tasks).map((key, id)=> { 
+    //   console.log("Key:", key, "id:", id, "Value:",  tasks[key].name );
+    //    }) ;
+
+
+
+
+    // Object.keys(tasks).map(function(key) { 
+    //   return <div>Key: {key}, Value: {tasks[key]}</div>;
+    //    }) ;
+      
+
+
+
+    return (
+        <div>
+            <h2>stats/stats.jsx</h2>
+            <p>Next up : Create an API and load the data from the Firebase table. 
+              start by adding Firestore Connect (HOC) to this pledmain.  
+            </p>
+{/* if (tasks.length > 0) (
+{
+  Object.keys(tasks).map((key, id)=> { 
+    return <div>Key: {key}, id: {id}, Value: {tasks[key].name}</div>;
+     }) 
+
+} );  */}
+
+    {/* { isLoaded(tasks) && tasks.map((d) => <div key={d.id} name={d.name} /> ) }    */}
+
+    { isLoaded(tasks) && console.log ({tasks}) }   
+
+    { Object.values(tasks).map((data, i) => 
+    <li key={i}> {data.name} </li>  )}
+       
+      <Table sortable celled fixed>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell
+              sorted={column === 'name' ? direction : null}
+              onClick={this.handleSort('name')}
+            >
+              Name
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === 'deviceid' ? direction : null}
+              onClick={this.handleSort('deviceid')}
+            >
+              deviceid
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === 'ledmain' ? direction : null}
+              onClick={this.handleSort('ledmain')}
+            >
+              ledmain
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+
+  {/* { Object.keys(tasks).map(key, id, deviceid, ledmain, name ) => ( */}
+
+
+
+        {_.map(tasks, ({ id, deviceid, ledmain, name }) => (
+
+              <Table.Row key={id}>
+              <Table.Cell>{name}</Table.Cell>
+              <Table.Cell>{deviceid}</Table.Cell>
+              <Table.Cell>{ledmain}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+      </div>
+    )
+  }
+}
+
+export default connect(mapState)(
+  firestoreConnect([{ collection: 'tasks' }])(stats)
+);

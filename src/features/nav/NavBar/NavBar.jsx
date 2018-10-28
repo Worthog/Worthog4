@@ -39,24 +39,48 @@ class NavBar extends Component {
         <Container>
           <Menu.Item as={Link} to="/" header>
             <img src="/assets/logo.png" alt="logo" />
-            Re-vents
+            Home
           </Menu.Item>
+          <Menu.Item as={NavLink} to="/blogs" name="Blogs" />
           <Menu.Item as={NavLink} to="/events" name="Events" />
           {authenticated &&
           <Menu.Item as={NavLink} to="/people" name="People" />}
-
           {authenticated &&
+          <Menu.Item as={NavLink} to="/devices" name="Devices" />}
+          <Menu.Item as={NavLink} to="/device/stats" name="Stats" />
+          <Menu.Item as={NavLink} to="/gallery" name="Gallery" />
+          {/* {authenticated &&
           <Menu.Item>
             <Button
               as={Link}
               to="/createEvent"
-              floated="right"
-              positive
-              inverted
+              floated="right"              
               content="Create Event"
+            /> 
+          </Menu.Item>}*/}
+
+
+          {/* {authenticated &&
+          <Menu.Item>
+            <Button
+              as={Link}
+              to="/addDevice"
+              floated="right"              
+              content="Add Device"
             />
-          </Menu.Item>}
-          {authenticated ? (
+          </Menu.Item>} */}
+
+            {/* {authenticated &&
+              <Menu.Item>
+                <Button
+                  as={Link}
+                  to="/addBrew"
+                  floated="right"              
+                  content="New"
+                />
+              </Menu.Item>} */}
+
+          {authenticated ? ( 
             <SignedInMenu auth={auth} profile={profile} signOut={this.handleSignOut} />
           ) : (
             <SignedOutMenu register={this.handleRegister} signIn={this.handleSignIn} />

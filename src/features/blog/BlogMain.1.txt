@@ -1,0 +1,66 @@
+import React, { Component } from 'react'
+import BlogItem from './BlogItem'
+
+import { connect } from 'react-redux'
+
+class BlogMain extends Component {
+ 
+
+ // note jan 29, remove the UL list and use a div instead
+//        <ul className="todo-list">  </ul>
+
+// use && to check if blogs list is empty
+
+state = {
+  initialLoading: true
+} 
+
+render() {
+    
+    const { blogs, loading, actions } = this.props;
+    
+   
+   //  The listitems was used to debug the setup 
+
+   //   let listItems = [] ;
+
+    // if (blogs.length > 0 ) {
+    //    listItems = blogs.map((d) => <li key={d.id}>{d.id}{','}{'\u00A0'} {d.title}</li>);
+    //  }; 
+
+    //  if (!loading ) {
+    //    listItems = blogs.map((d) => <li key={d.id}>{d.id}{','}{'\u00A0'} {d.title}</li>);
+    //  }; 
+
+
+    return (
+      <div className="col-sm-8 blog-main" id="postlist">  
+
+     
+      <div>
+      {/* {listItems } */}
+      </div>
+
+       { !loading && blogs.map ((d) => <BlogItem key={d.id} title={d.title} blog={d} /> ) }                
+       
+      </div> 
+      )
+  }
+}
+
+
+function mapStateToProps(state) {
+  return {
+   
+	  blogs: state.blog.blogs,
+    loading: state.blog.loading
+  }
+}
+
+
+export default connect(
+  mapStateToProps  
+)(BlogMain)
+
+
+

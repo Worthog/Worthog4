@@ -14,17 +14,17 @@ const sampleData = {
         lng: -73.98566440000002
       },
       hostedBy: 'Bob',
-      hostPhotoURL: 'https://randomuser.me/api/portraits/men/20.jpg',
+      hostPhotoURL: 'https://randomuser.me/api/portraits/women/20.jpg',
       attendees: [
         {
           id: 'a',
           name: 'Bob',
-          photoURL: 'https://randomuser.me/api/portraits/men/20.jpg'
+          photoURL: 'https://randomuser.me/api/portraits/women/20.jpg'
         },
         {
           id: 'b',
           name: 'Tom',
-          photoURL: 'https://randomuser.me/api/portraits/men/22.jpg'
+          photoURL: 'https://randomuser.me/api/portraits/women/22.jpg'
         }
       ]
     },
@@ -42,17 +42,17 @@ const sampleData = {
         lng: -0.12300089999996544
       },
       hostedBy: 'Tom',
-      hostPhotoURL: 'https://randomuser.me/api/portraits/men/22.jpg',
+      hostPhotoURL: 'https://randomuser.me/api/portraits/women/22.jpg',
       attendees: [
         {
           id: 'a',
           name: 'Bob',
-          photoURL: 'https://randomuser.me/api/portraits/men/20.jpg'
+          photoURL: 'https://randomuser.me/api/portraits/women/20.jpg'
         },
         {
           id: 'b',
           name: 'Tom',
-          photoURL: 'https://randomuser.me/api/portraits/men/22.jpg'
+          photoURL: 'https://randomuser.me/api/portraits/women/22.jpg'
         }
       ]
     }

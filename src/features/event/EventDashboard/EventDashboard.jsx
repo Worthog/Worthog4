@@ -5,7 +5,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { getEventsForDashboard } from '../eventActions';
 import EventList from '../EventList/EventList';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
-import EventActivity from '../EventActivity/EventActivity';
+// import EventActivity from '../EventActivity/EventActivity';
 
 const query = [
   {
@@ -17,8 +17,8 @@ const query = [
 
 const mapState = state => ({
   events: state.events,
-  loading: state.async.loading,
-  activities: state.firestore.ordered.activity
+  loading: state.async.loading
+  // activities: state.firestore.ordered.activity
 });
 
 const actions = {
@@ -41,7 +41,13 @@ class EventDashboard extends Component {
         moreEvents: true,
         loadingInitial: false
       });
+    } else{
+      this.setState({
+        loadingInitial: false
+      })
+
     }
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -68,7 +74,7 @@ class EventDashboard extends Component {
   render() {
     const { loading, activities } = this.props;
     const { moreEvents, loadedEvents } = this.state;
-    if (this.state.loadingInitial) return <LoadingComponent inverted={true} />;
+    // if (this.state.loadingInitial) return <LoadingComponent inverted={true} />;
 
     return (
       <Grid>
@@ -84,7 +90,27 @@ class EventDashboard extends Component {
 
         </Grid.Column>
         <Grid.Column width={6}>
-          <EventActivity activities={activities} contextRef={this.state.contextRef} />
+          <h4>September 19</h4>        
+          <p>I've decided that the Blog and the Gallery will be an integral part of the final app.  
+            Migrating those functions from the old app will be much easier if we switch to the Saga version. 
+            In the long run it might be easier, although there is a lot of prep up front. 
+          </p>
+          <p>Seems like a lot of work, but we can take it in steps.  Perhaps, during the process we can refine and
+            perfect the code.  So it won't feel like a step backwards. You have done all the work, might as well
+            put it use. 
+          </p>
+          <p>Review the Udemy couse on setting up Saga</p>
+          <ul>
+            <li>Set up Saga, Actions, Reducers</li>
+            <li>Migrate the Device functions</li>
+            <li>Migrate the Blog</li>
+            <li>Migrate the Gallery</li>
+          </ul>
+          {/* <EventActivity activities={activities} contextRef={this.state.contextRef} /> */}
+          <h4>These notes are from EventDashboard.jsx See features/event/eventDashboard</h4>
+          <p>Perhaps we need a simple list of devices.  Similar to the main page events list
+            but more basic.  Try creating a new page based on the events list, but create a Devie list. 
+            Use the simplified version in section #19</p>
         </Grid.Column>
         <Grid.Column width={10}>
           <Loader active={loading}/>

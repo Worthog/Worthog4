@@ -1,0 +1,12 @@
+export const TASK_REQUEST = 'TASK_REQUEST' ;
+export const TASK_SUCCESS = 'TASK_SUCCESS';
+export const TASK_FAIL  = 'TASK_FAIL';
+export const TASK_REQUEST_SW1 = 'TASK_REQUEST_SW1';
+export const TASK_SW1_ON  = 'TASK_SW1_ON';
+export const TASK_SW1_OFF = 'TASK_SW1_OFF';
+export const TASK_REQUEST_D0 = 'TASK_REQUEST_D0';
+export const TASK_D0_ON  = 'TASK_D0_ON';
+export const TASK_D0_OFF = 'TASK_D0_OFF';
+export const TEMP_REQUEST = 'TEMP_REQUEST';
+export const TEMP_SUCCESS  = 'TEMP_SUCCESS';
+export const TEMP_FAIL = 'TEMP_FAIL';

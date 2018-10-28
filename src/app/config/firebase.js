@@ -2,12 +2,12 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDTz7PhEojER4iyERzBNm32nz0pwKM3qDA",
-  authDomain: "revents-1077d.firebaseapp.com",
-  databaseURL: "https://revents-1077d.firebaseio.com",
-  projectId: "revents-1077d",
-  storageBucket: "revents-1077d.appspot.com",
-  messagingSenderId: "631636745857"
+  apiKey: "AIzaSyCHt2P3aR35s7YLS4t-Lk6ewvXpPM-W8gI",
+    authDomain: "revents-6a702.firebaseapp.com",
+    databaseURL: "https://revents-6a702.firebaseio.com",
+    projectId: "revents-6a702",
+    storageBucket: "revents-6a702.appspot.com",
+    messagingSenderId: "503344706898"
 }
 
 firebase.initializeApp(firebaseConfig);

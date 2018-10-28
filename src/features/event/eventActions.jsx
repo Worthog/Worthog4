@@ -12,6 +12,7 @@ export const createEvent = event => {
     const user = firestore.auth().currentUser;
     const photoURL = getState().firebase.profile.photoURL;
     let newEvent = createNewEvent(user, photoURL, event);
+    console.log( {newEvent}, "<-- the new EVENT object") ;
     try {
       let createdEvent = await firestore.add(`events`, newEvent);
       await firestore.set(`event_attendee/${createdEvent.id}_${user.uid}`, {
