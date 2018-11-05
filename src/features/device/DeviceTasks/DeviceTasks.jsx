@@ -2,13 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { withFirestore } from 'react-redux-firebase';
-import { Grid, Segment, Item, Checkbox, Button, Label, Icon } from 'semantic-ui-react';
+import { Grid, Segment, Item, Checkbox, Button, Label, Icon, Dropdown } from 'semantic-ui-react';
 import * as TaskActions from './taskActions';
 
 // lets remove mapstate and replace it with mapstatetoprops
 // if we have reached this page then active device state must be set.  
 // get the device info from ActiveDeviceState
 
+
+
+const timerOptions = [
+     {
+     key: 1,  
+     text: '3 Seconds',
+     value: 3
+     },
+     {
+      key: 2, 
+      text: '30 Minutes',
+      value: 1800
+      },
+      {
+       key: 3,
+       text: '60 Minutes',
+       value: 3600
+      }
+     ]
 
 function mapStateToProps(state, ownProps) {
 
@@ -23,6 +42,7 @@ function mapStateToProps(state, ownProps) {
     
   }
 }
+
 
 
 // const mapState = (state, ownProps) => {
@@ -43,6 +63,12 @@ function mapStateToProps(state, ownProps) {
 
 class DeviceTasks extends Component {
 
+  // state = {}
+
+  state = {   
+    value: 0
+  }
+
   async componentDidMount() {
     const {firestore, match} = this.props;
     await firestore.setListener(`devices/${match.params.id}`);
@@ -60,12 +86,49 @@ handleGetTemp = (device) => {
     const task = "tempvalue"      
     this.props.actions.getTempRequest(device, task); 
     
+  } 
+
+  tick() {
+      const device = this.props.device; 
+      var d = new Date();
+      var timestr = d.toLocaleTimeString() ;
+      // let deviceName = this.props.device.name ; 
+      let deviceName = device.name ; 
+      console.log( "Timer function fired @ ", timestr , "device = " , deviceName ) ;
+      const task = "tempvalue"      
+      this.props.actions.getTempRequest(device, task); 
+      
+  }
+
+  //  from stackoverflow example : this.intervalId = setInterval(() => this.loadData(), 3600000);
+  handle_Interval = (device, arg) => {       
+    
+    let timer = null;
+
+    if (arg === 'on') {
+      let interval = this.state.value * 1000 ; 
+      // alert("turn ON interval set to " + interval ); 
+      // var myTimer = setInterval( timerSet, 3000);
+      // this.state.timer = setInterval(setTimer(), 3000);
+      this.timer = setInterval(
+        () => this.tick(), interval );
+    }
+    else
+    {
+      // alert("turn OFF interval"); 
+      console.log("clear Interval" ); 
+      // debugger;
+      clearInterval(this.timer); 
+
+    }; 
+
+    const task = "sw1"  
+    this.props.actions.taskRequest(device, task, arg);     
   }  
 
 
-
   //  this.callFunction("sw1", "on", "" );   
-handle_sw1 = (device, arg) => {       
+  handle_sw1 = (device, arg) => {       
     const task = "sw1"  
     this.props.actions.taskRequest(device, task, arg);     
   }  
@@ -85,9 +148,16 @@ handle_sw1 = (device, arg) => {
     this.props.actions.taskRequest(device, task, arg);     
   }  
 
-
+  handleDropDown = (e, {value} ) => {
+    console.log ("from dropdown : value= ", value) ;    
+    this.setState({ value }); 
+    // const task = "tempvalue"  ;    
+    //  this.props.actions.getTempRequest(device, task); 
+    
+  }  
 
   render() {
+    const { value } = this.state.value;
     const {device} = this.props
     console.log({device}) ;
     return (
@@ -107,6 +177,19 @@ handle_sw1 = (device, arg) => {
        
         <Segment clearing>
         <p>The next step is set up the logging function to log the temp.</p>
+        <Label>Set Interval</Label>
+        
+           <Dropdown 
+             
+            selection 
+            onChange={this.handleDropDown}
+            placeholder='Select Interval' 
+            options={timerOptions} 
+            value={value}
+            />
+          <Button onClick={() => this.handle_Interval (device, "on") } floated="right" >On</Button>      
+          <Button onClick={() => this.handle_Interval (device, "off") } floated="right" >Off</Button> 
+         
         <span>{device.memo}</span>            
         </Segment>
         <Segment>                

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux' 
 import Photo from './Photo'
 import {objectToArray} from '../../app/common/util/helpers';
-import classes from './gallery.css'; 
+import styles from './gallery.css'; 
 
 
 class PhotoGrid extends Component {
@@ -20,7 +20,7 @@ class PhotoGrid extends Component {
     postArray = objectToArray( posts.posts ); 
     console.log("PhototGrid postArray = ", postArray ); 
     return (
-      <div className={classes.photogrid}>
+      <div className={styles.photogrid}>
         {postArray.map((d) => <Photo key={d.id} post={d} />)} 
       </div>
       )

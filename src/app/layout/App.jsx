@@ -70,6 +70,11 @@ const stats = Loadable({
   loading: LoadingComponent
 })
 
+const stat2 = Loadable({
+  loader: () => import('../../features/table/stat2'),
+  loading: LoadingComponent
+})
+
 const DemoTable = Loadable({
   loader: () => import('../../features/device/DeviceTasks/DemoTable'),
   loading: LoadingComponent
@@ -127,7 +132,7 @@ class App extends Component {
           render={() => (
             <div>
               <AsyncNavBar />
-              <Container className="main">
+              <Container className="main" style={{marginTop : "100px"  }} >
                 <Switch>
                   <Route path="/blogs" component={AsyncBlogs} />
                   <Route path="/blognew" component={AsyncNewBlog} />
@@ -145,6 +150,7 @@ class App extends Component {
                   <Route path="/devices" component={AsyncDeviceDashboard} />
                   <Route path="/device/stats" component={stats} />
                   <Route path="/device/stats/demo" component={DemoTable} />
+                  <Route path="/device/table" component={stat2} />
                   <Route path="/device/:id" component={AsyncDeviceForm} />
                   <Route path="/gallery" component={AsyncGallery} />
                   <Route path="/task/:id" component={AsyncTaskPage} />

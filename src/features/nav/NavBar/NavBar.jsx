@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withFirebase } from 'react-redux-firebase'
-import { Menu, Container, Button } from 'semantic-ui-react';
+import { Menu, Container } from 'semantic-ui-react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import SignedOutMenu from '../Menus/SignedOutMenu';
 import SignedInMenu from '../Menus/SignedInMenu';
 import { openModal } from '../../modals/modalActions'
+import styles from './navbar.css' ;
+
 
 const actions = {
   openModal
@@ -35,7 +37,7 @@ class NavBar extends Component {
     const { auth, profile} = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty
     return (
-      <Menu inverted fixed="top">
+      <Menu inverted fixed="top" className={styles.fixedmenu}>
         <Container>
           <Menu.Item as={Link} to="/" header>
             <img src="/assets/logo.png" alt="logo" />
@@ -48,6 +50,7 @@ class NavBar extends Component {
           {authenticated &&
           <Menu.Item as={NavLink} to="/devices" name="Devices" />}
           <Menu.Item as={NavLink} to="/device/stats" name="Stats" />
+          <Menu.Item as={NavLink} to="/device/table" name="Table" />
           <Menu.Item as={NavLink} to="/gallery" name="Gallery" />
           {/* {authenticated &&
           <Menu.Item>

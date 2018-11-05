@@ -68,7 +68,7 @@ export function* editBlogSaga({ Blog }) {
    try {  
     const edBlog = yield call(updateBlog, Blog );
     yield [      
-      put({ type: types.EDIT_BLOG_SUCCESS, Blog }),
+      put({ type: types.EDIT_BLOG_SUCCESS, edBlog }),
     ];
   } catch (error) {
     yield put({ type: types.EDIT_BLOG_FAILURE, error });
@@ -87,7 +87,7 @@ export function* completeBlogSaga({ Blog }) {
   try {  
     const newBlog = yield call(updateBlog, Blog );
     yield [      
-      put({ type: types.COMPLETE_BLOG_SUCCESS, Blog }),
+      put({ type: types.COMPLETE_BLOG_SUCCESS, newBlog }),
     ];
     
     
@@ -101,7 +101,7 @@ export function* deleteBlogSaga({ Blog }) {
    try {  
     const newBlog = yield call(deleteBlog, Blog );
     yield [      
-      put({ type: types.DELETE_BLOG_SUCCESS, Blog }),
+      put({ type: types.DELETE_BLOG_SUCCESS, newBlog }),
     ];
   } catch (error) {
     yield put({ type: 'DELETE_BLOG_FAILURE', error });

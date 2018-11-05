@@ -35,7 +35,7 @@ export function* editPostSaga({ Post }) {
    try {  
     const edPost = yield call(updatePost, Post );
     yield [      
-      put({ type: types.EDIT_POST_SUCCESS, Post }),
+      put({ type: types.EDIT_POST_SUCCESS, edPost }),
     ];
   } catch (error) {
     yield put({ type: 'EDIT_POST_FAILURE', error });
@@ -48,7 +48,7 @@ export function* deletePostSaga({ Post }) {
    try {  
     const newPost = yield call(deletePost, Post );
     yield [      
-      put({ type: types.DELETE_POST_SUCCESS, Post }),
+      put({ type: types.DELETE_POST_SUCCESS, newPost }),
     ];
   } catch (error) {
     yield put({ type: 'DELETE_POST_FAILURE', error });

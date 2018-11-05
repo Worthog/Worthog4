@@ -59,7 +59,7 @@ class stats extends Component {
   render() {
 
     const { tasks } = this.props;
-    const { column, data, direction } = this.state
+    const { column, direction } = this.state
 
     if (!isLoaded(tasks) || isEmpty(tasks)) return <LoadingComponent inverted={true} />;
 

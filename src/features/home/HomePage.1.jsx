@@ -1,15 +1,12 @@
 import React from 'react';
-import { Grid, Segment, Container  } from 'semantic-ui-react';
-import styles from './homepage.css' ;
+import { Grid, Segment } from 'semantic-ui-react';
+import './homepage.css' ;
 
-// <div className={`ui selection dropdown ${styles.custom}`}></div>
-// <div className="ui inverted vertical masthead center aligned segment">
-// <div className="ui text container"></div>
 const HomePage = ({history}) => {
   return (
     <div>     
-      <div className={styles.masthead} >        
-        <Container className={styles.textcontainer} >
+      <div className="ui inverted vertical masthead center aligned segment">
+        <div className="ui text container">
           <h1 className="ui inverted stackable header">
             <img
               className="ui image massive"
@@ -18,16 +15,12 @@ const HomePage = ({history}) => {
             />
             <div className="content">Worthog 4</div>
           </h1>
-          
-
-          <Container>
           <h4>version 1.0</h4>
           <div onClick={() => history.push('/blogs')} className="ui huge white inverted button">
             Get Started
             <i className="right arrow icon" />
           </div>
-          </Container>
-        </Container>
+        </div>
         
       </div>
      
@@ -47,22 +40,12 @@ const HomePage = ({history}) => {
           </ul>
          
           
-            <h5>Text Editors : </h5>
+            <h5>Also worth checking out is firepad : </h5>
             <br/>
             <p>
             <a href="https://firepad.io/" target="_blank" rel="noopener noreferrer">Firepad</a>
-            Firepad doesn't seem to allow for multiple records, at least it's not in plain sight.
-            </p>
-            <p>
-            Perhaps building a Rich Text Editor with React and Draft.js is a better choice? 
-            <a href="https://medium.com/@siobhanpmahoney/building-a-rich-text-editor-with-react-and-draft-js-part-3-persisting-rich-text-data-to-server-b298540ba8d8" target="_blank" rel="noopener noreferrer">Draft - Server</a>
-            </p>
+          </p>
           
-            <h4>Spread Operator</h4>
-            <p>Here is a nice article on using the Spread Operator with Redux. 
-            <a href=" https://redux.js.org/recipes/usingobjectspreadoperator/" target="_blank" rel="noopener noreferrer">Spread Operator with Redux</a>
-           
-            </p>
 
           <p>Particle API : 
              <a href="https://docs.particle.io/reference/javascript/" target="_blank" rel="noopener noreferrer">Particle Javascript Docs</a>

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Segment, Item, Icon, List, Button, Label  } from 'semantic-ui-react';
+import { Segment, Item, Icon, Button  } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 // import DeviceListAttendee from './DeviceListAttendee'
 import format from 'date-fns/format'
-import { objectToArray } from '../../../app/common/util/helpers'
+// import { objectToArray } from '../../../app/common/util/helpers'
 
 class DeviceListItem extends Component {
   render() {

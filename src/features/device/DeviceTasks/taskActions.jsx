@@ -1,4 +1,4 @@
-import { toastr } from 'react-redux-toastr';
+// import { toastr } from 'react-redux-toastr';
 // import { FETCH_EVENTS } from './deviceConstants';
 // import { asyncActionStart, asyncActionFinish, asyncActionError } from '../async/asyncActions';
 // import { createNewEvent } from '../../app/common/util/helpers';

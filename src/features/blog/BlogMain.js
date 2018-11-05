@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import BlogItem from './BlogItem'
 
 import { connect } from 'react-redux'
-import { Grid, Button, Segment, Rail , Image, Header, Sticky } from 'semantic-ui-react';
+import { Grid, Button, Header, Sticky } from 'semantic-ui-react';
 import { Link } from 'react-router-dom' ;
-import Remarkable from 'remarkable'; 
+// import Remarkable from 'remarkable'; 
 class BlogMain extends Component {
 
 state = {
@@ -15,7 +15,7 @@ handleContextRef = contextRef => this.setState({ contextRef })
 
 render() {
     
-    const { blogs, loading, actions } = this.props;
+    const { blogs, loading } = this.props;
     const { contextRef } = this.state   
     return (
 

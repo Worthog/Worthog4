@@ -1,8 +1,8 @@
 import React , { Component } from 'react';
 import { Link } from 'react-router-dom';
 //import CSSTransitionGroup from 'react-addons-css-transition-group';
-import { Card, Image } from 'semantic-ui-react';
-import classes from './gallery.css';
+import { Card } from 'semantic-ui-react';
+import styles from './gallery.css';
 
 class Photo extends Component {
   render() {
@@ -10,28 +10,19 @@ class Photo extends Component {
   
     var img = "http://localhost:3000/assets/gallery/" + post.display_src  ;
    // console.log ('img = ', img ) ;
-
+  //  <Card fluid color='red' header='Option 1' />
     return (      
-      <Card className={classes.gridfigure}>
-        <div className={classes.gridphotowrap}>
-          <Link to={`/gallery/${post._id}`}>
-            <Image src={img} alt={post.caption} className={classes.gridphoto} />
-           </Link>
-
-         {/* // <CSSTransitionGroup transitionName="like" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-            <span key={post.likes} className="likes-heart">{post.likes}</span>
-        //  </CSSTransitionGroup> */}
-
-        </div>
-
+      <Card fluid as={Link} to={`/gallery/${post._id}`} key={post._id} className={styles.gridfigure}>
+        
+            <img src={img} alt={post.caption} className={styles.gridphoto} />
+       
         <Card.Content>
-          <p>Title : {post.title}</p>
-          <p>Note: {post.note}</p>
-          
-        </Card.Content>
-      <br/>
-      <Link to={`/gallery/${post._id}`}> Edit </Link>
-      <br/>
+              <Card.Header textAlign="center">{post.caption}</Card.Header>
+              <Card.Meta textAlign="center">
+                    <p>add some stuff here </p>
+                    <Link to={`/gallery/${post._id}`}> Edit </Link>
+              </Card.Meta>          
+        </Card.Content>      
       </Card>
       
     )

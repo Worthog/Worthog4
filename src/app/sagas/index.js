@@ -1,11 +1,12 @@
-import { fork, all, takeLatest } from 'redux-saga/effects';
+import { all, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from '../constants/BlogActionTypes';
 import * as deviceTypes from '../constants/DeviceActionTypes';
 import * as taskTypes from '../constants/TaskActionTypes';
 import * as postTypes from '../constants/PostActionTypes';
-import {newBlogSaga, getBlogsSaga, getBlogSaga, addBlogSaga, completeBlogSaga, editBlogSaga, deleteBlogSaga, updateBlogSaga } from './blogSagas';
+// import {newBlogSaga, getBlogsSaga, getBlogSaga, addBlogSaga, completeBlogSaga, editBlogSaga, deleteBlogSaga, updateBlogSaga } from './blogSagas';
 // import {watchBlogs, watchAddBlog, watchCompleteBlog, watchEditBlog, watchDeleteBlog, watchBlog, watchNewBlog, watchBlogUpdate  } from './Blog-watcher';
-import {getDeviceSaga, getDevicebyIdSaga, addDeviceSaga, deleteDeviceSaga, updateDeviceSaga, setActiveDeviceSaga } from './DeviceSagas';
+import {newBlogSaga, getBlogsSaga, updateBlogSaga } from './blogSagas';
+import {getDeviceSaga, getDevicebyIdSaga, setActiveDeviceSaga } from './DeviceSagas';
 
 import * as taskSaga from './TaskSagas';
 import * as postSaga from './postSagas'; 

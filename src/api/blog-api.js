@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
-import { reduxFirestore, getFirestore } from 'redux-firestore';
+import { getFirebase } from 'react-redux-firebase';
+
 
 //  databaseURL: "https://revents-6a702.firebaseio.com",
 // "https://burger1-5f69a.firebaseio.com/ingredients.json"
@@ -10,7 +10,7 @@ import { reduxFirestore, getFirestore } from 'redux-firestore';
 
 export function getAllBlogs() {
   const firebase = getFirebase();
-  const firestore = getFirestore();
+  // const firestore = getFirestore();
   let token = ''; 
  //  console.log({firebase}, "<--getAllBlogs firebase"); 
  //  console.log({firestore}, "<--getAllBlogs firestore"); 
@@ -25,9 +25,11 @@ export function getAllBlogs() {
   });
   console.log ("token = ", token);
 
-  var config = {
-    headers: {'Authorization': "bearer " + token}
-  };
+  // var config = {
+  //   headers: {'Authorization': "bearer " + token}
+  // };
+
+
   // const queryParams = "?auth=" +  token + '"';
 
   axios.defaults.headers.common = {'Authorization': "bearer " + token}; 
@@ -95,7 +97,9 @@ export function addNewBlog(blog) {
   
   console.log("blog-api from addnewblog : ", blog ) ;
   const firebase = getFirebase();
-  const firestore = getFirestore();
+  
+  // const firestore = getFirestore();
+  
   let token = ''; 
   
   firebase.auth().onAuthStateChanged(function(user) {

@@ -1,10 +1,11 @@
 
 
-.photogrid{
+.photogrid {
   display: flex;
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto ;
+  background : white;
 }
 
 .gridfigure {
@@ -22,8 +23,8 @@
 
 .gridphoto{
   width :calc(100% + 4rem);
-  margin-left: -2rem;
-  margin-top: -2rem;
+  /* margin-left: -2rem;
+  margin-top: -2rem; */
   max-width: 200px;
 }
 

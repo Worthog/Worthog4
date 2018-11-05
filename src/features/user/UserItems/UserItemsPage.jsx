@@ -62,7 +62,7 @@ class UserItemsPage extends Component {
 // get the devices from firebase and poulate the userdevices list, see the events props 
 
   render() {
-    const {auth, match, requesting, events, eventsLoading } = this.props;
+    const { match, requesting, events, eventsLoading } = this.props;
    
     const loading = requesting[`users/${match.params.id}`]
   

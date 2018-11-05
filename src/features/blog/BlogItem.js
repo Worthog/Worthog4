@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import classnames from 'classnames'
+// import classnames from 'classnames'
 import { Segment, Item, Icon, Button, Container } from 'semantic-ui-react';
 import moment from 'moment' ; 
 var Remarkable = require('remarkable') ;

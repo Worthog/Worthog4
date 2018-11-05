@@ -1,5 +1,5 @@
 import { put, call } from 'redux-saga/effects';
-import { getAllDevices, getDevicebyId, addDevice, updateDevice, deleteDevice  } from '../../api/device-api';
+import { getAllDevices, addDevice, updateDevice, deleteDevice  } from '../../api/device-api';
 import { getStatus } from '../../api/photon-api';
 import * as types from '../constants/DeviceActionTypes';
 import { toastr } from 'react-redux-toastr';
@@ -36,7 +36,7 @@ export function* deleteDeviceSaga({ device }) {
    try {  
     const newdevice = yield call(deleteDevice, device );
     yield [      
-      put({ type: types.DELETE_DEVICE_SUCCESS, device }),
+      put({ type: types.DELETE_DEVICE_SUCCESS, newdevice }),
     ];
   } catch (error) {
     yield put({ type: 'DELETE_DEVICE_FAILURE', error });

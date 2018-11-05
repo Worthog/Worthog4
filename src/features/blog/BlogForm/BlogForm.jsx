@@ -60,7 +60,7 @@ class BlogForm extends Component {
     var id = this.props.match.params.id ;	
   
     let blogObject = {}; 
-    let initialValues = {}; 
+    // let initialValues = {}; 
     console.log("find Blog by id : ", id ) ; 
     // blogObject =  _.find( this.props.blogs, {'id' : id} ) ; 
     let itemIndex = this.props.blogs.findIndex(i=> i.id === id);
@@ -68,7 +68,7 @@ class BlogForm extends Component {
     console.log ("item index = : ", itemIndex); 
     blogObject = this.props.blogs[itemIndex];
     console.log ("update blogObject: ", blogObject); 
-    initialValues = blogObject ;
+    // let initialValues = blogObject ;
   } 
   
 
@@ -105,7 +105,7 @@ class BlogForm extends Component {
   };
 
   render() {
-    const { invalid, submitting, blogs, pristine, loading } = this.props;
+    const { invalid, submitting, pristine, loading } = this.props;
     return (
       <Grid>
         

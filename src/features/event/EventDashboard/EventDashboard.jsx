@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { getEventsForDashboard } from '../eventActions';
 import EventList from '../EventList/EventList';
-import LoadingComponent from '../../../app/layout/LoadingComponent';
+// import LoadingComponent from '../../../app/layout/LoadingComponent';
 // import EventActivity from '../EventActivity/EventActivity';
 
 const query = [
@@ -72,7 +72,7 @@ class EventDashboard extends Component {
   handleContextRef = contextRef => this.setState({contextRef})
 
   render() {
-    const { loading, activities } = this.props;
+    const { loading } = this.props;
     const { moreEvents, loadedEvents } = this.state;
     // if (this.state.loadingInitial) return <LoadingComponent inverted={true} />;
 
