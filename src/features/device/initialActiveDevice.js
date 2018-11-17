@@ -3,7 +3,7 @@ export default {
    "name":"initialstate",
    "deviceid": "000",
    "token": "000",
-   "connected" : "false",
+   "connected" : false ,
    "ledmain" : "false", 
    "temperature" : "0", 
    "pressure" : "0", 

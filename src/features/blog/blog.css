@@ -1,0 +1,16 @@
+/* Blog styles*/
+
+.blogpost {
+
+  font-weight: normal;
+  padding: 2em 0 !important;
+
+}
+  
+.blogheader {
+  
+color: #1e70bf;
+
+} 
+
+  /*end blogitem styles*/

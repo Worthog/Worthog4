@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 // import classnames from 'classnames'
-import { Segment, Item, Icon, Button, Container, Popup } from 'semantic-ui-react';
+import { Segment, Item, Icon, Button, Container } from 'semantic-ui-react';
 import moment from 'moment' ; 
-import ReactMarkdown from 'react-markdown' ;
-import CodeBlock from './blogdemo/code-block' ;
+
 import styles from './blog.css' ;
 
 // var Remarkable = require('remarkable') ;
@@ -54,27 +53,17 @@ class BlogItem extends Component {
          </Segment>        
         <Segment>
         <Container fluid>
-        <ReactMarkdown
-            className="result"
-            source={blog.article}            
-            renderers={{code: CodeBlock}}
-          />        
+        {blog.article}
         </Container>
         </Segment>
-          <Segment clearing>
-            <Popup
-              trigger={<Button as={Link} to={`/blog/${blog.id}`} icon="edit" color="teal" floated="right" content="Edit" />}
-              content='Edit as text' />
-            <Popup
-              trigger={<Button as={Link} to={`/blogedit/${blog.id}`} icon="edit" color="yellow" floated="right" content="Markdown" />}
-              content='Edit with Markdown' />
-          </Segment>
+        <Segment clearing>       
+          <Button as={Link} to={`/blog/${blog.id}`} color="teal" floated="right" content="Edit" />
+        </Segment>
       </Segment.Group>  
       
       );
 
-//  <Popup trigger={<Button icon='add' />} content='Add users to your feed' />
-//  <Button as={Link} to={`/blogedit/${blog.id}`} color="teal" floated="right" content="Markdown" />
+
     return (
       <div className={styles.blogpost}>        
         {element}      

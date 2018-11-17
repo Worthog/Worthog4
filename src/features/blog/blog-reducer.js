@@ -26,16 +26,16 @@ export default function blogReducer(state=initialState, action) {
  
 
     case types.GET_BLOGS_SUCCESS:
-        console.log("from blog-reducer get_blogs_success changed to blogArrray"); 
+        // console.log("from blog-reducer get_blogs_success changed to blogArrray"); 
         
 
         let arr = Object.entries(action.blogs).map(entry => Object.assign({value: entry[1]}, { key: entry[0] }));
-        console.log("Blog reducer : arr = ", arr ) ;
+        // console.log("Blog reducer : arr = ", arr ) ;
 
         let blogArray = [];
         blogArray = objectToArray(action.blogs); 
         
-        console.log("blogArray = ", blogArray) ;
+        // console.log("blogArray = ", blogArray) ;
 
         // return Object.assign({}, state, arr );
 
@@ -61,7 +61,7 @@ export default function blogReducer(state=initialState, action) {
       })    
 
     case types.NEW_BLOG_SUCCESS:
-      console.log("NEW_BLOG_SUCCESS Reducer ??? ");
+      // console.log("NEW_BLOG_SUCCESS Reducer ??? ");
       return Object.assign({}, state, {
       blogs: [
         ...state.blogs,
@@ -77,7 +77,7 @@ export default function blogReducer(state=initialState, action) {
 
     case types.DELETE_BLOG_SUCCESS:
         index = state.blogs.findIndex((blog) => blog._id === action.blog._id);
-        console.log("DELETE blog index = ", index);        
+        // console.log("DELETE blog index = ", index);        
         return Object.assign({}, state.blogs, {
             blogs: [
             ...state.blogs.slice(0, index),
@@ -88,7 +88,7 @@ export default function blogReducer(state=initialState, action) {
 
     case types.UPDATE_BLOG_SUCCESS:
         index = state.blog.findIndex((blog) => blog.id === action.blog.id);
-        console.log("UPDATE blog index = ", index);        
+        // console.log("UPDATE blog index = ", index);        
         return Object.assign({}, state.blog, {
             blogs: [
             ...state.blog.blogs.slice(0, index),

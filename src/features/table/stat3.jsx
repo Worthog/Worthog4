@@ -139,7 +139,7 @@ class stat2 extends Component {
 
     return (
         <div>
-            <h2>stats/stats.jsx</h2>
+            <h2>/table/stat3.jsx</h2>
             <p>Add a "value" field, task,arg,value</p>
             <p>Next up : Create an API and load the data from the Firebase table. 
               start by adding Firestore Connect (HOC) to this pledmain.  

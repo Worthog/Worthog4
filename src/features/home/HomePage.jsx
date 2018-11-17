@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Segment, Container  } from 'semantic-ui-react';
+import { Grid, Segment, Container, Icon  } from 'semantic-ui-react';
 import styles from './homepage.css' ;
 
 // <div className={`ui selection dropdown ${styles.custom}`}></div>
@@ -31,34 +31,75 @@ const HomePage = ({history}) => {
         
       </div>
      
-      <Grid>
+      <Grid centered columns={1}>
         <Grid.Column width={10}>
                   
           <h4>Reference Links </h4>
           <Segment>
-          <h5>React Redux Saga Firebase </h5> 
+          <h5>Firebase & Firestore</h5> 
             <ul>
-            <li><a href="https://react-table.js.org/#/story/readme/" target="_blank" rel="noopener noreferrer" > React Table</a> </li>
-            <li><a href="https://rexxars.github.io/react-markdown/" target="_blank" rel="noopener noreferrer" > React-Markdown</a> </li>
-
+ 
             <li><a href="https://redux-saga-firebase.js.org/" target="_blank" rel="noopener noreferrer" > Redux-Saga-Firebase</a> </li>
             <li><a href="http://react-redux-firebase.com" target="_blank" rel="noopener noreferrer"> React-Redux-Firebase</a> </li>
             <li> <a href="https://redux-saga.js.org/" target="_blank" rel="noopener noreferrer">Redux Saga Docs</a> </li>
           </ul>
-         
-          
+
+            <h5><b>Firestore</b> Examples</h5>
+
+            <ul>
+              <li><a href="https://github.com/prescottprue/redux-firestore/" target="_blank" rel="noopener noreferrer" > Redux Firestore</a> </li>
+              <li><a href="https://github.com/prescottprue/redux-firestore/tree/master/examples/basic" target="_blank" rel="noopener noreferrer" > Redux-Firestore Example</a> </li>
+
+            </ul>
+            <p>Checkout the example above for a very extensive explanation of setting up and using Redux-Firestore
+              installed to D:\react\firestore-Todo  folder. 
+            </p>
+
+            <h5>Firebase Examples</h5>
+
+            <ul>
+              
+              <li><a href="https://redux-saga-firebase.js.org/" target="_blank" rel="noopener noreferrer" > Redux-Saga-Firebase</a> </li>
+              <li><a href="http://react-redux-firebase.com" target="_blank" rel="noopener noreferrer"> React-Redux-Firebase</a> </li>
+              <li> <a href="https://redux-saga.js.org/" target="_blank" rel="noopener noreferrer">Redux Saga Docs</a> </li>
+            </ul>
+
+
+
+          <h5>  <Icon name='github' size='large' /> Github</h5>           
+          <ul>
+            <li><a href=" https://github.com/Worthog/Worthog4" target="_blank" rel="noopener noreferrer" > Worthog 4.0</a> </li>
+            <li><a href="https://code.visualstudio.com/docs/editor/versioncontrol/" target="_blank" rel="noopener noreferrer" >Version Control with VScode</a> </li>
+            <li><a href="https://github.com/explore/" target="_blank" rel="noopener noreferrer" > Explore Github</a> </li>
+            <li><a href="https://help.github.com/articles/git-and-github-learning-resources/" target="_blank" rel="noopener noreferrer" > Learning Github</a> </li> 
+            <li><a href="https://git-scm.com/book/en/v2/" target="_blank" rel="noopener noreferrer" > Git Book</a> </li>
+            <li><a href=" https://guides.github.com/activities/hello-world/" target="_blank" rel="noopener noreferrer" > Git Guide</a> </li>
+            <li><a href="https://code.visualstudio.com/docs/introvideos/versioncontrol/" target="_blank" rel="noopener noreferrer" > VScode Github Video</a> </li>
+           
+          </ul>
+
             <h5>Text Editors : </h5>
             <br/>
             <p>
             <a href="https://firepad.io/" target="_blank" rel="noopener noreferrer">Firepad</a>
+            {' '}{' '}
             Firepad doesn't seem to allow for multiple records, at least it's not in plain sight.
             </p>
             <p>
             Perhaps building a Rich Text Editor with React and Draft.js is a better choice? 
+            &nbsp;&nbsp;&nbsp;
             <a href="https://medium.com/@siobhanpmahoney/building-a-rich-text-editor-with-react-and-draft-js-part-3-persisting-rich-text-data-to-server-b298540ba8d8" target="_blank" rel="noopener noreferrer">Draft - Server</a>
             </p>
-          
-            <h4>Spread Operator</h4>
+            <li><a href="https://react-table.js.org/#/story/readme/" target="_blank" rel="noopener noreferrer" > React Table</a> </li>
+            <li><a href="https://rexxars.github.io/react-markdown/" target="_blank" rel="noopener noreferrer" > React-Markdown</a> </li>
+
+          </Segment>
+          <Segment>
+            <h4>Reference</h4>
+
+            <a href=" https://formidable.com/open-source/victory/docs/" target="_blank" rel="noopener noreferrer">Victory Charts</a>
+
+
             <p>Here is a nice article on using the Spread Operator with Redux. 
             <a href=" https://redux.js.org/recipes/usingobjectspreadoperator/" target="_blank" rel="noopener noreferrer">Spread Operator with Redux</a>
            

@@ -154,7 +154,7 @@ class stat2 extends Component {
 
     return (
         <div>
-            <h2>stats/stats.jsx</h2>
+            <h2>/table/stat2.jsx</h2>
                    
             <ReactTable
             data={events}

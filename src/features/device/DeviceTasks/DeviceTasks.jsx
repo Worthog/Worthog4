@@ -19,11 +19,16 @@ const timerOptions = [
      },
      {
       key: 2, 
+      text: '10 Minutes',
+      value: 600
+      },
+     {
+      key: 3, 
       text: '30 Minutes',
       value: 1800
       },
       {
-       key: 3,
+       key: 4,
        text: '60 Minutes',
        value: 3600
       }
