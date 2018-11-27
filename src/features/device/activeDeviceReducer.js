@@ -35,10 +35,11 @@ const updateActiveDeviceSuccess = ( state, action ) => {
   };
 
 const tempSuccess = (state, action) => {    
-    console.log("from tempSuccess action = ", action) ;
+    console.log("ActiveDeviceReducer TEMP_SUCCESS = ", action) ;
     return Object.assign( {} , state,  {
        connected: "true" ,
-       temperature: action.temp_celsius       
+       temperature: action.temp_celsius ,
+       tempF :  (action.temp_celsius * 1.8) + 32      
           });    
         };
 

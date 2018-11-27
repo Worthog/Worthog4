@@ -29,7 +29,7 @@ export default function blogReducer(state=initialState, action) {
         // console.log("from blog-reducer get_blogs_success changed to blogArrray"); 
         
 
-        let arr = Object.entries(action.blogs).map(entry => Object.assign({value: entry[1]}, { key: entry[0] }));
+        // let arr = Object.entries(action.blogs).map(entry => Object.assign({value: entry[1]}, { key: entry[0] }));
         // console.log("Blog reducer : arr = ", arr ) ;
 
         let blogArray = [];

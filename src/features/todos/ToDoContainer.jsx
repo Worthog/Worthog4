@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
-import { Grid, Button } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom' ;
-import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import { Grid } from 'semantic-ui-react';
+
+// import { Link } from 'react-router-dom' ;
+
 
 import ToDoList from './ToDoList/ToDoList';
-import LoadingComponent from '../../app/layout/LoadingComponent';
 
-const query = [
-  {
-    collection: 'ToDos',
-    orderBy: ['updated', 'desc'],    
-  }
-]
-
-const mapState = state => ({
-  todos: state.firestore.ordered.ToDos,
-});
 
 
 class ToDoContainer extends Component {
@@ -25,17 +14,23 @@ class ToDoContainer extends Component {
     const { todos } = this.props;
    //  console.log ("todos = " , {todos} );
  
-    if (!isLoaded(todos) || isEmpty(todos)) return <LoadingComponent inverted={true} />;
-
+  
     return (
+      <div>
       <Grid>
-        <Grid.Column width={10}>
+        <Grid.Column width={16}>
           {<ToDoList todos={todos} /> }
         </Grid.Column>
-        <Grid.Column width={6}>
+        {/* <Grid.Column width={6}>
           <h4>ToDoContainer</h4>
 
           <Button as={Link} to={`/addtodo`} color="grey"  content="Add To Do" />  
+
+          <h4>Nov 21</h4>  
+          <p>If we want to change the Firestore query, based on the menu filter, we need to move the Loading function
+             from the ToDoContainer to the ToDoList. 
+          </p>
+
           <h4>Nov 15</h4>  
           <p>Fixed the dates to be compatible with Firestore.  Cleaned up the forms and added a markdown editor
              The list is sorted by the "updated" date field. 
@@ -58,12 +53,11 @@ class ToDoContainer extends Component {
              will need some action creators as well.              
           </p>
           
-        </Grid.Column>
+        </Grid.Column> */}
       </Grid>
+      </div>
     );
   }
 }
 
-export default connect(mapState)(
-  firestoreConnect(query)(ToDoContainer)
-);
+export default ToDoContainer;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import CodeMirror from 'codemirror' ; 
 //  const CodeMirror = window.CodeMirror
 
@@ -8,15 +8,15 @@ import React, { Component } from 'react';
 // also used as an example:
 // https://github.com/facebook/react/blob/master/src/browser/ui/dom/components/ReactDOMInput.js
 
-const IS_MOBILE = typeof navigator === 'undefined' || (
-  navigator.userAgent.match(/Android/i)
-    || navigator.userAgent.match(/webOS/i)
-    || navigator.userAgent.match(/iPhone/i)
-    || navigator.userAgent.match(/iPad/i)
-    || navigator.userAgent.match(/iPod/i)
-    || navigator.userAgent.match(/BlackBerry/i)
-    || navigator.userAgent.match(/Windows Phone/i)
-)
+// const IS_MOBILE = typeof navigator === 'undefined' || (
+//   navigator.userAgent.match(/Android/i)
+//     || navigator.userAgent.match(/webOS/i)
+//     || navigator.userAgent.match(/iPhone/i)
+//     || navigator.userAgent.match(/iPad/i)
+//     || navigator.userAgent.match(/iPod/i)
+//     || navigator.userAgent.match(/BlackBerry/i)
+//     || navigator.userAgent.match(/Windows Phone/i)
+// )
 
 class CodeMirrorEditor extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class CodeMirrorEditor extends React.Component {
   }
 
   componentDidMount() {
-    const isTextArea = this.props.forceTextArea || IS_MOBILE;
+    // const isTextArea = this.props.forceTextArea || IS_MOBILE;
     // if (!isTextArea) {
     //  //  this.editor = CodeMirror.fromTextArea(this.editorRef.current, this.props);
     //   this.editor.on('change', this.handleChange);

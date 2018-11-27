@@ -16,16 +16,28 @@ import { addToDo, updateToDo } from './ToDoActions' ;
 
 
 import TextInput from '../../app/common/form/TextInput';
-import TextArea from '../../app/common/form/TextArea';
+// import TextArea from '../../app/common/form/TextArea';
 import DateInput from '../../app/common/form/DateInput';
 import ReactMDE from 'redux-forms-markdown-editor';
-
+import SelectInput from '../../app/common/form/SelectInput';
 
 const initialSource = `
 ### Preview - window 
 This is not working because of the onChange function
 see features/blog/blogedit/blogedit.jsx
 `
+
+
+const topics = [
+  { key: 0, text: 'All', value: 'All' },
+  { key: 1, text: 'Photon', value: 'Photon' },
+  { key: 2, text: 'General', value: 'General' },
+  { key: 3, text: 'Documents', value: 'Documents'  },
+  { key: 4, text: 'Beer', value: 'Beer' },
+  { key: 5, text: 'Hardware', value: 'Hardware' },
+  { key: 6, text: 'Software', value: 'Software' }
+]
+
 
 // const mapState = (state) => {{
   
@@ -243,8 +255,8 @@ class ToDoForm extends Component {
               />
               
               <Segment>
-                <label>Priority : </label>
-                {'  '}  {'  '}
+                <label>Priority : &nbsp; &nbsp; &nbsp; </label>
+              
                 <label><Field
                   name="priority"
                   component="input"
@@ -255,7 +267,33 @@ class ToDoForm extends Component {
                 {'  '}
                 <label><Field name="priority" component="input" type="radio" value="3" /> Low</label>
               </Segment>
+             
+              <Segment>
+               
+               <Form.Field
+                 control={Field}
+                 label="Complete: "
+                 name="complete"
+                 component="input"
+                 type="checkbox"
+               />
 
+             </Segment>
+
+              <Segment>
+              <label>Category</label> 
+                 <Field
+                 name="category"
+                 type="text"
+                 component={SelectInput}
+                 options={topics}
+                 placeholder="Select a Category"
+               />
+              
+              </Segment>
+
+             
+              <Segment>
               <label>Start Date</label>  
               <Field
                 name="startdate"
@@ -276,7 +314,8 @@ class ToDoForm extends Component {
                 showTimeSelect
                 placeholder="end date"
               />
-             
+             </Segment>
+
               <Button
                 loading={loading}
                 disabled={invalid || submitting || pristine}
@@ -306,4 +345,4 @@ export default withFirestore(
   )
 );
 
-([{}])
+// ([{}])

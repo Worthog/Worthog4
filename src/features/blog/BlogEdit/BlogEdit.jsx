@@ -15,7 +15,7 @@ import TextInput from '../../../app/common/form/TextInput';
 // import TextBox from '../../../app/common/form/TextBox';
 import DateInput from '../../../app/common/form/DateInput';
 import ReactMarkdown from 'react-markdown' ;
-import Editor from './editor' ;
+// import Editor from './editor' ;
 import CodeBlock from './code-block' ;
 import ReactMDE from 'redux-forms-markdown-editor';
 

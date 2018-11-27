@@ -6,6 +6,7 @@ export default {
    "connected" : false ,
    "ledmain" : "false", 
    "temperature" : "0", 
+   "tempF" : "0", 
    "pressure" : "0", 
    "sw1" : "off", 
    "sw2" : "off", 

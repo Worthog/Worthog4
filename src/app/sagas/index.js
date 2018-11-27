@@ -23,7 +23,8 @@ export default function* rootSaga() {
     takeLatest(taskTypes.TEMP_REQUEST, taskSaga.tempRequestSaga),    
     takeLatest(taskTypes.TASK_REQUEST_SW1, taskSaga.taskRequestSw1Saga),
     takeLatest(taskTypes.TASK_REQUEST_D0, taskSaga.taskRequestD0Saga),
-    takeLatest(postTypes.GET_POSTS_REQUEST, postSaga.getPostsSaga)         
+    takeLatest(postTypes.GET_POSTS_REQUEST, postSaga.getPostsSaga),
+    takeLatest(taskTypes.VITALS_REQUEST, taskSaga.vitalsRequestSaga),         
   ])
 }
 

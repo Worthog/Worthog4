@@ -138,13 +138,15 @@ class stat2 extends Component {
 
     },
    
+// try a sortable format .format("dddd, MMMM Do YYYY, h:mm:ss a")
+
     {
       id: 'updated', // Required because our accessor is not a string
-      Header: 'updated',                
+      Header: 'updated (y-m-d)',                
       accessor: d => {
         return moment(d.updated)
           .local()
-          .format("dddd, MMMM Do YYYY, h:mm:ss a")
+          .format("YYYY-MM-DD @ h:mm a")
       } 
 
     }

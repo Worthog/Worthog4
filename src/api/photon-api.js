@@ -68,3 +68,37 @@ export function valueRequest(device, task) {
     console.error(err);
   });
 }
+
+
+export function vitalsRequest(device) {
+  
+  const token = device.token ;
+  const photonid = device.deviceid ;
+
+  // sample :  https://api.particle.io/v1/diagnostics/0123456789abcdef01234567/update?access_token=1234"
+  // sample : "https://api.particle.io/v1/diagnostics/0123456789abcdef01234567/metadata?access_token=1234"
+
+  axios.defaults.headers.common = {'Authorization': "Bearer " + token}; 
+
+
+  //  return  axios.get('https://api.particle.io/v1/diagnostics/' + photonid + "/update"  ).then (function(response) {
+  //  console.log("device diagnostics update : " , response.data ); 
+  //  return response ;
+
+
+
+
+
+  // }).catch(function(err) { console.error(err); });
+  // refresh vitals with POST / Update
+
+         axios.post('https://api.particle.io/v1/diagnostics/' + photonid + "/update"  )
+  return axios.get('https://api.particle.io/v1/diagnostics/' + photonid ).then(function(response) {
+  console.log("device vitals response : " , response.data ) ; 
+  return response ;
+
+  }).catch(function(err) {
+    console.error(err);
+  });
+}
+
