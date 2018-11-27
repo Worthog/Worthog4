@@ -42,8 +42,8 @@ function mapStateToProps(state, ownProps) {
   //   blogObject = state.blog.blogs.filter(i => i.id === blogId)[0];
   // }
   return {   
-	  device: state.activeDevice,
-    loading: state.blog.loading, 
+	  device: state.activeDevice
+    
     
   }
 }
@@ -108,6 +108,7 @@ handleGetTemp = (device) => {
   //  from stackoverflow example : this.intervalId = setInterval(() => this.loadData(), 3600000);
   handle_Interval = (device, arg) => {       
     
+    // eslint-disable-next-line 
     let timer = null;
 
     if (arg === 'on') {

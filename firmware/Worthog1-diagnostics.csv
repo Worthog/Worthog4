@@ -1,0 +1,13 @@
+timestamp,service.cloud.publish.sent,service.cloud.uptime,service.coap.round_trip,service.device.status,device.cloud.coap.unack,device.cloud.publish.rate_limited,device.cloud.disconnects,device.cloud.connection.disconnect,device.cloud.connection.attempts,device.cloud.connection.error,device.cloud.connection.status,device.network.signal.strengthv,device.network.signal.at,device.network.signal.qualityv,device.network.signal.quality,device.network.signal.strength,device.network.signal.rssi,device.network.connection.disconnect,device.network.connection.attempts,device.network.connection.disconnects,device.network.connection.error,device.network.connection.status,device.system.memory.used,device.system.memory.total,device.system.uptime
+2018-11-26T20:57:35.562Z,6,9501,51,ok,0,0,3,1,40,25,2,-57,1,35,83.87,86,-57,6,1,25,0,4,31664,83200,278618
+2018-11-26T18:19:14.349Z,0,0,385,ok,0,0,3,1,40,25,2,-61,1,31,70.96,78,-61,6,1,25,0,4,31664,83200,269117
+2018-11-26T17:53:31.809Z,0,3,3718,ok,0,0,2,1,13,26,2,-59,1,33,77.42,82,-59,6,1,6,0,4,31664,83200,267572
+2018-11-26T17:52:00.356Z,0,3,3764,ok,0,0,1,1,3,0,2,-58,1,34,80.64,84,-58,6,1,1,0,4,31664,83200,267479
+2018-11-26T03:10:41.226Z,121,214597,880,ok,0,0,0,0,1,0,2,-55,1,37,90.32,90,-55,0,1,0,0,4,31664,83200,214603
+2018-11-23T15:34:03.623Z,3,0,121,ok,0,0,0,0,1,0,1,-50,1,42,100,100,-50,0,1,0,0,4,33064,83200,3
+2018-11-21T14:54:56.543Z,20,35254,918,ok,0,0,1,1,1,0,2,-56,1,36,87.09,88,-56,0,1,0,0,4,31664,83200,163763
+2018-11-21T05:07:24.567Z,0,2,2270,ok,0,0,1,1,1,0,2,-56,1,36,87.09,88,-56,0,1,0,0,4,31664,83200,128510
+2018-11-19T17:53:09.323Z,3,1651,614,ok,0,0,0,0,1,0,2,-53,1,39,96.77,94,-53,0,1,0,0,4,31648,83200,1654
+2018-11-19T17:32:36.338Z,3,418,148,ok,0,0,0,0,1,0,2,-53,1,39,96.77,94,-53,0,1,0,0,4,31648,83200,421
+2018-11-19T17:25:38.405Z,3,0,114,ok,0,0,0,0,1,0,1,-51,1,41,100,98,-51,0,1,0,0,4,33064,83200,3
+2018-11-19T17:25:30.603Z,1,0,110,ok,0,0,0,0,1,0,2,-51,1,41,100,98,-51,0,1,0,0,4,31296,83200,3

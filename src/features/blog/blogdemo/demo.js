@@ -72,7 +72,7 @@ class Demo extends Component {
   handleControlsChange(mode) {
     this.setState({htmlMode: mode})
   }
-
+ 
   render() {
     return (
       <div className="demo">

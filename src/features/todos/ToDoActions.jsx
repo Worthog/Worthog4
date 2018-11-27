@@ -1,6 +1,6 @@
 import { toastr } from 'react-redux-toastr';
 
-import { asyncActionStart, asyncActionFinish, asyncActionError } from '../async/asyncActions';
+//  import { asyncActionStart, asyncActionFinish, asyncActionError } from '../async/asyncActions';
 
 import moment from 'moment';
 import firebase from '../../app/config/firebase';
@@ -16,7 +16,8 @@ export const createToDo = (todo) => {
   //updated: Date.now()
 
   // let timestampNow = firebase.firestore.now(); 
-  const firestore = firebase.firestore();
+  // const firestore = firebase.firestore();
+
   let timestampNow = moment(Date.now()).toDate();  
   return {
     ...todo,    
@@ -101,4 +102,5 @@ export const updateToDo = todo => {
   };
 };
 
+// Query the todos : 
 

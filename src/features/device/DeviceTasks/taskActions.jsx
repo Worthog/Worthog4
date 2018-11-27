@@ -36,3 +36,9 @@ export const getTempRequest = (device, task) => {
   };
 };
 
+export const getVitalsRequest = (device, task) => {  
+  return {
+    type: types.VITALS_REQUEST,
+    device, task
+  };
+};

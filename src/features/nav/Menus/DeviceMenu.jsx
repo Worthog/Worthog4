@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Image, Dropdown } from 'semantic-ui-react';
+import { Menu, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 
 //  need to pass device id to dashboard page see connect page

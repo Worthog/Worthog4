@@ -1,6 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 
-import { taskRequest, valueRequest } from '../../api/photon-api';
+import { taskRequest, valueRequest, vitalsRequest } from '../../api/photon-api';
 import { logTask, logValue } from '../../api/firestore-api';
 import * as types from '../constants/TaskActionTypes';
 
@@ -79,6 +79,23 @@ export function* taskRequestD0Saga({ device,task, arg }) {
     yield put({type: types.TASK_D0_OFF, device }) ;
    }; 
    
+ } catch (error) {
+   yield put({ type: types.TASK_FAIL , error });
+ }
+}
+
+
+export function* vitalsRequestSaga({ device, task }) {
+  
+ try {  
+     const response = yield call(vitalsRequest, device );
+     console.log("vitalsRequest response = ", response.data); 
+       
+     yield call( logTask, device );  
+
+  // yield put({type: types.TASK_SUCCESS, device });
+   
+     
  } catch (error) {
    yield put({ type: types.TASK_FAIL , error });
  }

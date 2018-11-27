@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable'
 import LoadingComponent from './LoadingComponent'
 import { UserIsAuthenticated } from '../../features/auth/authWrapper';
+
 const AsyncHomePage = Loadable({
   loader: () => import('../../features/home/HomePage'),
   loading: LoadingComponent
@@ -149,6 +150,10 @@ const AsyncToDoForm = Loadable({
   loading: LoadingComponent
 })
 
+const AsyncNotes = Loadable({
+  loader: () => import('../../features/notes/notes'),
+  loading: LoadingComponent
+})
 
 class App extends Component {
   render() {
@@ -156,7 +161,7 @@ class App extends Component {
       <div>
         <AsyncModalManager/>
         <Switch>
-          <Route exact path="/" component={AsyncHomePage} />
+          <Route exact path="/" component={AsyncHomePage} />          
         </Switch>
 
         <Route
@@ -196,6 +201,7 @@ class App extends Component {
                   <Route path="/task/:id" component={AsyncTaskPage} />
                   <Route path="/connect/:id" component={AsyncConnectPage} />
                   <Route path="/error" component={AsyncNotFound} />
+                  <Route path="/notes" component={AsyncNotes} />
                  
                   <Route component={AsyncNotFound} />
                 </Switch>

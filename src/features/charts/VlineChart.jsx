@@ -24,7 +24,7 @@ import {
 } from 'victory';
 
 
-const MSEC_DAILY = 86400000;
+// const MSEC_DAILY = 86400000;
 
 
 function isNumber(obj) {
@@ -39,10 +39,10 @@ function filterByValue(item) {
     return false; 
 }
 
-function convertTemp(newval) {   
-  let temp_celsius = (((newval * 3.3) / 4095) - 0.5) * 100 ;
-  return temp_celsius 
-}
+// function convertTemp(newval) {   
+//   let temp_celsius = (((newval * 3.3) / 4095) - 0.5) * 100 ;
+//   return temp_celsius 
+// }
 
 // old vresion  var data = tasks.filter(filterByValue).map(item => {
 
@@ -101,7 +101,7 @@ class VLineChart extends Component {
     taskArray = objectToArray( tasks ) ;
     // console.log("VlineChart taskArray = ", taskArray ); 
 
-    let taskData = []
+    // let taskData = []
 
     // Object.keys(tasks).map((key, id)=> { 
         
@@ -122,7 +122,7 @@ class VLineChart extends Component {
 
 
 
-    var series = []
+    // var series = []
 
  
     var series = [

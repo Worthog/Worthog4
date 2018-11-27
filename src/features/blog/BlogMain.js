@@ -24,7 +24,7 @@ render() {
       <Grid>
         <Grid.Column width={12}>
         
-          { !loading && blogs.map ((d) => <BlogItem key={d.id} title={d.title} blog={d} /> ) }        
+          { !loading && blogs.map ((d) => <BlogItem key={d.id} title={d.title} blog={d} /> ).reverse() }        
 
         </Grid.Column>
         <Grid.Column width={4}  >

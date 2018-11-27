@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Item, Icon, Button  } from 'semantic-ui-react';
+import { Segment, Item, Button  } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 // import DeviceListAttendee from './DeviceListAttendee'
 // import format from 'date-fns/format'
@@ -16,14 +16,27 @@ class ToDoListItem extends Component {
     <Segment.Group className={styles.todopost}>
         <Segment>
           <Item.Group>
-            <Item>
-             
+            <Item>            
               <Item.Content>
                 <h3 className={styles.todoheader} >{todo.title} </h3>                
                 <Item.Description>
                   owner :  {todo.username}  
                   &nbsp; &nbsp; &nbsp;
-                  <b>Updated: </b>{moment(todo.updated.toDate()).format("dddd, MMMM Do YYYY, h:mm a")}
+                  Updated: <b>{moment(todo.updated.toDate()).format("dddd, MMMM Do YYYY, h:mm a")} </b>
+                  &nbsp; &nbsp; &nbsp;
+                  Priority: &nbsp; &nbsp; <b> {todo.priority} </b> ; 
+                </Item.Description>                              
+              </Item.Content>
+            </Item>
+            <Item>            
+              <Item.Content>
+                       
+                <Item.Description>
+                  Category :  <b> {todo.category}  </b>
+                  &nbsp; &nbsp; &nbsp;
+                  Status: This item is <b>{todo.complete ? 'Complete' : 'Active'}</b>.
+                 
+                 
                 </Item.Description>                              
               </Item.Content>
             </Item>

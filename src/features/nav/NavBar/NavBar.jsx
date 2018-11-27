@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withFirebase } from 'react-redux-firebase'
-import { Menu, Container } from 'semantic-ui-react';
+import { Menu, Container, Icon } from 'semantic-ui-react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import SignedOutMenu from '../Menus/SignedOutMenu';
 import SignedInMenu from '../Menus/SignedInMenu';
@@ -42,16 +42,15 @@ class NavBar extends Component {
       <Menu inverted fixed="top" className={styles.fixedmenu}>
         <Container>
           <Menu.Item as={Link} to="/" header>
-            <img src="/assets/logo.png" alt="logo" />
+            {/* <img src="/assets/logo.png" alt="logo" /> */}          
+            <Icon name="cloud download" size="big" />
             Home
           </Menu.Item>
           <Menu.Item as={NavLink} to="/blogs" name="Blogs" />
-          <Menu.Item as={NavLink} to="/events" name="Events" />
-          {authenticated &&
-          <Menu.Item as={NavLink} to="/people" name="People" />}
+          <Menu.Item as={NavLink} to="/events" name="Events" />         
           {authenticated &&
           <Menu.Item as={NavLink} to="/devices" name="Devices" />}
-          <Menu.Item as={NavLink} to="/device/stats" name="Stats" />
+          <Menu.Item as={NavLink} to="/notes"    name="Notes" />
           <Menu.Item as={NavLink} to="/device/table" name="Table" />
           <Menu.Item as={NavLink} to="/device/chart" name="Chart" />
           <Menu.Item as={NavLink} to="/gallery" name="Gallery" />

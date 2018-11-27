@@ -28,10 +28,10 @@ export const createDevice = device => {
     const user = firestore.auth().currentUser;
     const photoURL = getState().firebase.profile.photoURL;
     let newDevice = createNewDevice(user, photoURL, device);
-    console.log( {newDevice}, "<-- the new device object") ;
+    // console.log( {newDevice}, "<-- the new device object") ;
     try {
       let createdDevice = await firestore.add(`devices`, newDevice);
-      
+      console.log( {createdDevice}, "<-- the new device object") ;
       toastr.success('Success', 'Device was created');
     } catch (error) {
       toastr.error('Oops', 'Something went wrong');

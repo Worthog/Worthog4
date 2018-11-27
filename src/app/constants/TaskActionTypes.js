@@ -10,3 +10,6 @@ export const TASK_D0_OFF = 'TASK_D0_OFF';
 export const TEMP_REQUEST = 'TEMP_REQUEST';
 export const TEMP_SUCCESS  = 'TEMP_SUCCESS';
 export const TEMP_FAIL = 'TEMP_FAIL';
+export const VITALS_REQUEST = 'VITALS_REQUEST';
+export const VITALS_SUCCESS  = 'VITALS_SUCCESS';
+export const VITALS_FAIL = 'VITALS_FAIL';

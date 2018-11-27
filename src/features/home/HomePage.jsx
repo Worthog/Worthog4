@@ -1,205 +1,336 @@
-import React from 'react';
-import { Grid, Segment, Container, Icon  } from 'semantic-ui-react';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import {
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Header,
+  Icon,
+  Image,
+  List,
+  Menu,
+  Responsive,
+  Segment,
+  Sidebar,
+  Visibility,
+} from 'semantic-ui-react'
 import styles from './homepage.css' ;
 
-// <div className={`ui selection dropdown ${styles.custom}`}></div>
-// <div className="ui inverted vertical masthead center aligned segment">
-// <div className="ui text container"></div>
-const HomePage = ({history}) => {
-  return (
-    <div>     
-      <div className={styles.masthead} >        
-        <Container className={styles.textcontainer} >
-          <h1 className="ui inverted stackable header">
-            <img
-              className="ui image massive"
-              src="/assets/logo.png"
-              alt="logo"
-            />
-            <div className="content">Worthog 4</div>
-          </h1>
-          
+/* eslint-disable react/no-multi-comp */
+/* Heads up! HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled components for
+ * such things.
+ */
+const HomepageHeading = ({ mobile }) => (
+  <Container text>
+    <Header
+      as='h1'
+      content='Worthog 4'
+      inverted
+      style={{
+        fontSize: mobile ? '2em' : '4em',
+        fontWeight: 'normal',
+        marginBottom: 0,
+        marginTop: mobile ? '1.5em' : '3em',
+      }}
+    />
+    <Header
+      as='h2'
+      content='Evolved'
+      inverted
+      style={{
+        fontSize: mobile ? '1.5em' : '1.7em',
+        fontWeight: 'normal',
+        marginTop: mobile ? '0.5em' : '1.5em',
+      }}
+    />
+    <Button  as={Link} to={`/notes`} primary size='huge'>
+      Get Started
+      <Icon name='right arrow' />
+    </Button>
+  </Container>
+)
 
-          <Container>
-          <h4>version 1.0</h4>
-          <div onClick={() => history.push('/blogs')} className="ui huge white inverted button">
-            Get Started
-            <i className="right arrow icon" />
-          </div>
-          </Container>
-        </Container>
-        
-      </div>
-     
-      <Grid centered columns={1}>
-        <Grid.Column width={10}>
-                  
-          <h4>Reference Links </h4>
-          <Segment>
-          <h5>Firebase & Firestore</h5> 
-            <ul>
- 
-            <li><a href="https://redux-saga-firebase.js.org/" target="_blank" rel="noopener noreferrer" > Redux-Saga-Firebase</a> </li>
-            <li><a href="http://react-redux-firebase.com" target="_blank" rel="noopener noreferrer"> React-Redux-Firebase</a> </li>
-            <li> <a href="https://redux-saga.js.org/" target="_blank" rel="noopener noreferrer">Redux Saga Docs</a> </li>
-          </ul>
+HomepageHeading.propTypes = {
+  mobile: PropTypes.bool,
+}
 
-            <h5><b>Firestore</b> Examples</h5>
+/* Heads up!
+ * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
+ * It can be more complicated, but you can create really flexible markup.
+ */
+class DesktopContainer extends Component {
+  state = {}
 
-            <ul>
-              <li><a href="https://github.com/prescottprue/redux-firestore/" target="_blank" rel="noopener noreferrer" > Redux Firestore</a> </li>
-              <li><a href="https://github.com/prescottprue/redux-firestore/tree/master/examples/basic" target="_blank" rel="noopener noreferrer" > Redux-Firestore Example</a> </li>
+  hideFixedMenu = () => this.setState({ fixed: false })
+  showFixedMenu = () => this.setState({ fixed: true })
 
-            </ul>
-            <p>Checkout the example above for a very extensive explanation of setting up and using Redux-Firestore
-              installed to D:\react\firestore-Todo  folder. 
-            </p>
+  render() {
+    const { children } = this.props
+    //  this is for the menu  const { fixed } = this.state
+    // cloud download
 
-            <h5>Firebase Examples</h5>
-
-            <ul>
-              
-              <li><a href="https://redux-saga-firebase.js.org/" target="_blank" rel="noopener noreferrer" > Redux-Saga-Firebase</a> </li>
-              <li><a href="http://react-redux-firebase.com" target="_blank" rel="noopener noreferrer"> React-Redux-Firebase</a> </li>
-              <li> <a href="https://redux-saga.js.org/" target="_blank" rel="noopener noreferrer">Redux Saga Docs</a> </li>
-            </ul>
-
-
-
-          <h5>  <Icon name='github' size='large' /> Github</h5>           
-          <ul>
-            <li><a href=" https://github.com/Worthog/Worthog4" target="_blank" rel="noopener noreferrer" > Worthog 4.0</a> </li>
-            <li><a href="https://code.visualstudio.com/docs/editor/versioncontrol/" target="_blank" rel="noopener noreferrer" >Version Control with VScode</a> </li>
-            <li><a href="https://github.com/explore/" target="_blank" rel="noopener noreferrer" > Explore Github</a> </li>
-            <li><a href="https://help.github.com/articles/git-and-github-learning-resources/" target="_blank" rel="noopener noreferrer" > Learning Github</a> </li> 
-            <li><a href="https://git-scm.com/book/en/v2/" target="_blank" rel="noopener noreferrer" > Git Book</a> </li>
-            <li><a href=" https://guides.github.com/activities/hello-world/" target="_blank" rel="noopener noreferrer" > Git Guide</a> </li>
-            <li><a href="https://code.visualstudio.com/docs/introvideos/versioncontrol/" target="_blank" rel="noopener noreferrer" > VScode Github Video</a> </li>
-           
-          </ul>
-
-            <h5>Text Editors : </h5>
-            <br/>
-            <p>
-            <a href="https://firepad.io/" target="_blank" rel="noopener noreferrer">Firepad</a>
-            {' '}{' '}
-            Firepad doesn't seem to allow for multiple records, at least it's not in plain sight.
-            </p>
-            <p>
-            Perhaps building a Rich Text Editor with React and Draft.js is a better choice? 
-            &nbsp;&nbsp;&nbsp;
-            <a href="https://medium.com/@siobhanpmahoney/building-a-rich-text-editor-with-react-and-draft-js-part-3-persisting-rich-text-data-to-server-b298540ba8d8" target="_blank" rel="noopener noreferrer">Draft - Server</a>
-            </p>
-            <li><a href="https://react-table.js.org/#/story/readme/" target="_blank" rel="noopener noreferrer" > React Table</a> </li>
-            <li><a href="https://rexxars.github.io/react-markdown/" target="_blank" rel="noopener noreferrer" > React-Markdown</a> </li>
-
+    return (
+      <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+        <Visibility
+          once={false}
+          onBottomPassed={this.showFixedMenu}
+          onBottomPassedReverse={this.hideFixedMenu}
+        >
+          <Segment
+            inverted
+            textAlign='center'
+            style={{ minHeight: 700, padding: '1em 0em' }}
+            vertical
+            className={styles.masthead} 
+          >
+            {/* <Menu
+              fixed={fixed ? 'top' : null}
+              inverted={!fixed}
+              pointing={!fixed}
+              secondary={!fixed}
+              size='large'
+            >
+              <Container>
+                <Menu.Item as='a' active>
+                  Home
+                </Menu.Item>
+                <Menu.Item as='a'>Work</Menu.Item>
+                <Menu.Item as='a'>Company</Menu.Item>
+                <Menu.Item as='a'>Careers</Menu.Item>
+                <Menu.Item position='right'>
+                  <Button as='a' inverted={!fixed}>
+                    Log in
+                  </Button>
+                  <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
+                    Sign Up
+                  </Button>
+                </Menu.Item>
+              </Container>
+            </Menu> */}
+            <HomepageHeading />
           </Segment>
-          <Segment>
-            <h4>Reference</h4>
+        </Visibility>
 
-            <a href=" https://formidable.com/open-source/victory/docs/" target="_blank" rel="noopener noreferrer">Victory Charts</a>
+        {children}
+      </Responsive>
+    )
+  }
+}
 
+DesktopContainer.propTypes = {
+  children: PropTypes.node,
+}
 
-            <p>Here is a nice article on using the Spread Operator with Redux. 
-            <a href=" https://redux.js.org/recipes/usingobjectspreadoperator/" target="_blank" rel="noopener noreferrer">Spread Operator with Redux</a>
-           
+class MobileContainer extends Component {
+  state = {}
+
+  handlePusherClick = () => {
+    const { sidebarOpened } = this.state
+
+    if (sidebarOpened) this.setState({ sidebarOpened: false })
+  }
+
+  handleToggle = () => this.setState({ sidebarOpened: !this.state.sidebarOpened })
+
+  render() {
+    const { children } = this.props
+    const { sidebarOpened } = this.state
+
+    return (
+      <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
+        <Sidebar.Pushable>
+          <Sidebar as={Menu} animation='uncover' inverted vertical visible={sidebarOpened}>
+            <Menu.Item as='a' active>
+              Home
+            </Menu.Item>
+            <Menu.Item as='a'>Work</Menu.Item>
+            <Menu.Item as='a'>Company</Menu.Item>
+            <Menu.Item as='a'>Careers</Menu.Item>
+            <Menu.Item as='a'>Log in</Menu.Item>
+            <Menu.Item as='a'>Sign Up</Menu.Item>
+          </Sidebar>
+
+          <Sidebar.Pusher
+            dimmed={sidebarOpened}
+            onClick={this.handlePusherClick}
+            style={{ minHeight: '100vh' }}
+          >
+            <Segment
+              inverted
+              textAlign='center'
+              style={{ minHeight: 350, padding: '1em 0em' }}
+              vertical
+            >
+              <Container>
+                <Menu inverted pointing secondary size='large'>
+                  <Menu.Item onClick={this.handleToggle}>
+                    <Icon name='sidebar' />
+                  </Menu.Item>
+                  <Menu.Item position='right'>
+                    <Button as='a' inverted>
+                      Log in
+                    </Button>
+                    <Button as='a' inverted style={{ marginLeft: '0.5em' }}>
+                      Sign Up
+                    </Button>
+                  </Menu.Item>
+                </Menu>
+              </Container>
+              <HomepageHeading mobile />
+            </Segment>
+
+            {children}
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+      </Responsive>
+    )
+  }
+}
+
+MobileContainer.propTypes = {
+  children: PropTypes.node,
+}
+
+const ResponsiveContainer = ({ children }) => (
+  <div>
+    <DesktopContainer>{children}</DesktopContainer>
+    <MobileContainer>{children}</MobileContainer>
+  </div>
+)
+
+ResponsiveContainer.propTypes = {
+  children: PropTypes.node,
+}
+
+const HomepageLayout = () => (
+  <ResponsiveContainer>
+    <Segment style={{ padding: '8em 0em' }} vertical>
+      <Grid container stackable verticalAlign='middle'>
+        <Grid.Row>
+          <Grid.Column width={8}>
+            <Header as='h3' style={{ fontSize: '2em' }}>
+              We Help Companies and Companions
+            </Header>
+            <p style={{ fontSize: '1.33em' }}>
+              We can give your company superpowers to do things that they never thought possible.
+              Let us delight your customers and empower your needs... through pure data analytics.
             </p>
-
-          <p>Particle API : 
-             <a href="https://docs.particle.io/reference/javascript/" target="_blank" rel="noopener noreferrer">Particle Javascript Docs</a>
-             <a href="https://docs.particle.io/reference/api/" target="_blank" rel="noopener noreferrer">Particle Cloud Docs</a>           
-          </p>  
-          <p>React-Bootstrap : 
-            <a href="https://react-bootstrap.github.io/components.html#grid" target="_blank" rel="noopener noreferrer">React-Bootstrap</a>
-          </p>
-           <p>React-Widgets : Date Time Picker  
-            <a href="http://jquense.github.io/react-widgets/docs/#/datetime-picker?_k=4swym3" target="_blank" rel="noopener noreferrer">React-Widgets</a>
-          </p>
-          <p>Redux-Forms :  
-            <a href="http://redux-form.com/6.5.0/" target="_blank" rel="noopener noreferrer">Redux Forms</a>
-          </p>
-        
-          
-          <p>Moment-Format (date Time) :  
-            <a href="http://momentjs.com/docs/#/displaying/format/" target="_blank" rel="noopener noreferrer">Moment.js</a>
-          </p>
-           <p>Mongo db :  
-            <a href="https://docs.mongodb.com/manual/reference/method/cursor.sort/#cursor.sort" target="_blank" rel="noopener noreferrer">Mongodb.js</a>
-          </p>
-            <p>Mongoose Users Guide:  
-            <a href="http://mongoosejs.com/docs/guide.html" target="_blank" rel="noopener noreferrer">Mongoose.js</a>
-          </p>
-           <p>Flex-Box Guide:  
-            <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener noreferrer">Flex-box</a>
-          </p>
-          <p>React-Router Guide:  
-            <a href="https://github.com/reactjs/react-router-tutorial/tree/master/lessons/12-navigating" target="_blank" rel="noopener noreferrer">React-Router</a>
-          </p>
-          <p>React-Bootstrap-Table:  
-            <a href="http://allenfang.github.io/react-bootstrap-table/docs.html" target="_blank" rel="noopener noreferrer">React Bootstrap Table</a>
-          </p>
-         <p> Webpack - version 2.6.1 - 
-            <a href="https://webpack.js.org/guides/" target="_blank" rel="noopener noreferrer">WebPack</a>
-          </p>
-
-          <p>
-            <a href="https://lodash.com/" target="_blank" rel="noopener noreferrer">Lo Dash</a>
-          </p>
-          
-          <p>
-            <a href="http://visjs.org/index.html"  target="_blank" rel="noopener noreferrer">VIS.js</a>
-          </p>
-          <p>
-            <a href="http://uber.github.io/react-vis/#/documentation/overview/getting-started"  target="_blank" rel="noopener noreferrer">react-VIS.js</a>
-          </p>
-          </Segment>
-       
-          <h4>Stuff to Check out </h4>
-          <Segment>
-
-          <p>Firebase Queries:
-          <a href="https://firebase.google.com/docs/firestore/query-data/order-limit-data" target="_blank" rel="noopener noreferrer">Firebase Order/Limit Data</a>
-          </p>
-
-
-          <p>Firebase Authentication in React, Redux (Message Board pt 2)
-          <a href="https://www.youtube.com/watch?v=xWWyZou370k" target="_blank" rel="noopener noreferrer">Firebase Auth</a>
-          </p>
-
-          <p>Visjs.org  : 
-            A chart and timeline app.
-            <a href="http://visjs.org" target="_blank" rel="noopener noreferrer">Visjs</a>
-          </p>    
-                  
-          <p>Draft.js</p>
-          <p>
-            See the NEW editor recently released by Facebook.  
-            Looks like a good choice if you want a rich text editor in a react application.  
-            <a href="https://github.com/facebook/draft-js" target="_blank" rel="noopener noreferrer">Draft.js </a>          
-          </p> 
-          </Segment>
-       
-          <h4>Blogs you should read </h4>
-          <Segment>
-          <p>Particle - Azure : 
-            <a href="https://community.particle.io/t/microsoft-partnership/26736" target="_blank" rel="noopener noreferrer">Microsoft Partnership?</a>
-          </p>    
-          <p>Hacking with React : 
-            <a href="https://lodash.com/docs/" target="_blank" rel="noopener noreferrer">Lo-Dash</a>
-          </p>          
-          <p>Practical Redux : </p>
-          <p>
-          Useful techniques for using Redux-ORM to help manage your normalized state, part 1:
-          Redux-ORM use cases and basic usage
-            <a href="http://blog.isquaredsoftware.com/series/practical-redux/" target="_blank" rel="noopener noreferrer">Practical Redux </a>          
-          </p> 
-          </Segment>
-        </Grid.Column>
+            <Header as='h3' style={{ fontSize: '2em' }}>
+              We Make Bananas That Can Dance
+            </Header>
+            <p style={{ fontSize: '1.33em' }}>
+              Yes that's right, you thought it was the stuff of dreams, but even bananas can be
+              bioengineered.
+            </p>
+          </Grid.Column>
+          <Grid.Column floated='right' width={6}>
+            <Image bordered rounded size='large' src='/images/wireframe/white-image.png' />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column textAlign='center'>
+            <Button size='huge'>Check Them Out</Button>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
+    </Segment>
 
+    <Segment style={{ padding: '0em' }} vertical>
+      <Grid celled='internally' columns='equal' stackable>
+        <Grid.Row textAlign='center'>
+          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
+            <Header as='h3' style={{ fontSize: '2em' }}>
+              "Put some stuff here..."
+            </Header>
+            <p style={{ fontSize: '1.33em' }}>That is what they all say about us</p>
+          </Grid.Column>
+          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
+            <Header as='h3' style={{ fontSize: '2em' }}>
+              "More comments..."
+            </Header>
+            <p style={{ fontSize: '1.33em' }}>
+              <Image avatar src='/images/avatar/large/nan.jpg' />
+              <b>Nan</b> Chief Fun Officer Acme Toys
+            </p>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Segment>
 
-    </div>
-  );
-};
+    <Segment style={{ padding: '8em 0em' }} vertical>
+      <Container text>
+        <Header as='h3' style={{ fontSize: '2em' }}>
+          Breaking The Grid, Grabs Your Attention
+        </Header>
+        <p style={{ fontSize: '1.33em' }}>
+          Instead of focusing on content creation and hard work, we have learned how to master the
+          art of doing nothing by providing massive amounts of whitespace and generic content that
+          can seem massive, monolithic and worth your attention.
+        </p>
+        <Button as='a' size='large'>
+          Read More
+        </Button>
 
-export default HomePage;
+        <Divider
+          as='h4'
+          className='header'
+          horizontal
+          style={{ margin: '3em 0em', textTransform: 'uppercase' }}
+        >
+          <p >Case Studies</p>
+        </Divider>
+
+        <Header as='h3' style={{ fontSize: '2em' }}>
+          Did We Tell You About Our Bananas?
+        </Header>
+        <p style={{ fontSize: '1.33em' }}>
+          Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but
+          it's really true. It took years of gene splicing and combinatory DNA research, but our
+          bananas can really dance.
+        </p>
+        <Button as='a' size='large'>
+          I'm Still Quite Interested
+        </Button>
+      </Container>
+    </Segment>
+
+    <Segment inverted vertical style={{ padding: '5em 0em' }}>
+      <Container>
+        <Grid divided inverted stackable>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <Header inverted as='h4' content='About' />
+              <List link inverted>
+                <List.Item as='a'>Sitemap</List.Item>
+                <List.Item as='a'>Contact Us</List.Item>
+                <List.Item as='a'>Religious Ceremonies</List.Item>
+                <List.Item as='a'>Gazebo Plans</List.Item>
+              </List>
+            </Grid.Column>
+            <Grid.Column width={3}>
+              <Header inverted as='h4' content='Services' />
+              <List link inverted>
+                <List.Item as='a'>Banana Pre-Order</List.Item>
+                <List.Item as='a'>DNA FAQ</List.Item>
+                <List.Item as='a'>How To Access</List.Item>
+                <List.Item as='a'>Favorite X-Men</List.Item>
+              </List>
+            </Grid.Column>
+            <Grid.Column width={7}>
+              <Header as='h4' inverted>
+                Footer Header
+              </Header>
+              <p>
+                Extra space for a call to action inside the footer that could help re-engage users.
+              </p>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
+    </Segment>
+  </ResponsiveContainer>
+)
+
+export default HomepageLayout
