@@ -75,6 +75,11 @@ const stat2 = Loadable({
   loading: LoadingComponent
 })
 
+const vline = Loadable({
+  loader: () => import('../../features/charts/VlineChart'),
+  loading: LoadingComponent
+})
+
 const DemoTable = Loadable({
   loader: () => import('../../features/device/DeviceTasks/DemoTable'),
   loading: LoadingComponent
@@ -96,6 +101,11 @@ const AsyncDeviceDashboard = Loadable({
   loading: LoadingComponent
 })
 
+const AsyncDeviceContainer = Loadable({
+  loader: () => import('../../features/device/DeviceContainer'),
+  loading: LoadingComponent
+})
+
 const AsyncGallery = Loadable({
   loader: () => import('../../features/gallery/Gallery-Container'),
   loading: LoadingComponent
@@ -106,14 +116,36 @@ const AsyncBlogs = Loadable({
   loading: LoadingComponent
 })
 
+const AsyncBlogForm = Loadable({
+  loader: () => import('../../features/blog/BlogForm/BlogForm'),
+  loading: LoadingComponent
+})
 
 const AsyncNewBlog = Loadable({
   loader: () => import('../../features/blog/BlogForm/BlogForm'),
   loading: LoadingComponent
 })
 
-const AsyncBlogForm = Loadable({
-  loader: () => import('../../features/blog/BlogForm/BlogForm'),
+const AsyncBlogDemo = Loadable({
+  loader: () => import('../../features/blog/blogdemo/demo'),
+  loading: LoadingComponent
+})
+
+const AsyncBlogEdit = Loadable({
+  loader: () => import('../../features/blog/BlogEdit/BlogEdit'),
+  loading: LoadingComponent
+})
+
+//AsyncTodoContainer}
+
+const AsyncTodoContainer = Loadable({
+  loader: () => import('../../features/todos/ToDoContainer'),
+  loading: LoadingComponent
+})
+
+
+const AsyncToDoForm = Loadable({
+  loader: () => import('../../features/todos/ToDoForm'),
   loading: LoadingComponent
 })
 
@@ -137,6 +169,9 @@ class App extends Component {
                   <Route path="/blogs" component={AsyncBlogs} />
                   <Route path="/blognew" component={AsyncNewBlog} />
                   <Route path="/blog/:id" component={AsyncBlogForm} />
+                  <Route path="/blogdemo" component={AsyncBlogDemo} />
+                  <Route path="/blogedit/:id" component={AsyncBlogEdit} />
+                  <Route path="/blogedit" component={AsyncBlogEdit} />
                   <Route path="/events" component={AsyncEventDashboard} />
                   <Route path="/event/:id" component={AsyncEventDetailedPage} />
                   <Route path="/useritems/:id" component={AsyncUserItemsPage} />
@@ -147,15 +182,21 @@ class App extends Component {
                   <Route path="/createEvent" component={UserIsAuthenticated(AsyncEventForm)} />
                   <Route path="/addDevice" component={UserIsAuthenticated(AsyncAddDeviceForm)} />
                   <Route path="/addBrew" component={UserIsAuthenticated(AsyncAddBrewForm)} />
-                  <Route path="/devices" component={AsyncDeviceDashboard} />
+                  <Route path="/devices" component={AsyncDeviceContainer} />
                   <Route path="/device/stats" component={stats} />
                   <Route path="/device/stats/demo" component={DemoTable} />
                   <Route path="/device/table" component={stat2} />
+                  <Route path="/device/chart" component={vline} />
+                  <Route path="/device/dashboard/:id" component={AsyncDeviceDashboard} />
                   <Route path="/device/:id" component={AsyncDeviceForm} />
+                  <Route path="/todos" component={AsyncTodoContainer} />
+                  <Route path="/addtodo" component={AsyncToDoForm} />
+                  <Route path="/todo/:id" component={AsyncToDoForm} />
                   <Route path="/gallery" component={AsyncGallery} />
                   <Route path="/task/:id" component={AsyncTaskPage} />
                   <Route path="/connect/:id" component={AsyncConnectPage} />
                   <Route path="/error" component={AsyncNotFound} />
+                 
                   <Route component={AsyncNotFound} />
                 </Switch>
               </Container>

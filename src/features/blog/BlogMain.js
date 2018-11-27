@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import BlogItem from './BlogItem'
 
 import { connect } from 'react-redux'
-import { Grid, Button, Header, Sticky } from 'semantic-ui-react';
+import { Grid, Button, Header, Sticky, Item } from 'semantic-ui-react';
 import { Link } from 'react-router-dom' ;
 // import Remarkable from 'remarkable'; 
+
+
 class BlogMain extends Component {
 
 state = {
@@ -25,17 +27,28 @@ render() {
           { !loading && blogs.map ((d) => <BlogItem key={d.id} title={d.title} blog={d} /> ) }        
 
         </Grid.Column>
-        <Grid.Column width={4} >
-        <div ref={this.handleContextRef}>
-         
-        
-                <Sticky context={contextRef} >
-                  <Header as='h3'>Stuck Content</Header>
-                  <h4>Blog Main Page</h4>          
-                  <Button as={Link} to={`/blognew`} color='blue' content="New Post" />                   
-                  <p>Lets move the stats and demo buttons from the list item to this page. </p>
-                </Sticky>
-         
+        <Grid.Column width={4}  >
+        <div ref={this.handleContextRef} >
+                 
+                <Sticky context={contextRef} style={{position: "fixed" }} >
+                  <Header as='h4'>Add a post</Header> 
+                  <p>You can create a new post using "markdown" or plain text by
+                    selecting one of the buttons below.</p>
+
+                  <Button as={Link} to={`/blogedit`} color='blue' content="Markdown" />         
+                  <Button as={Link} to={`/blognew`} color='blue' content="Text" />                   
+                  
+                             
+              <Item.Group>
+                <Item>
+                  <Item.Content>
+                    <h4> React-Markdown Demo </h4>
+                    <Button as={Link} to={`/blogdemo`} color='blue' content="Demo" />
+                  </Item.Content>
+                </Item>
+              </Item.Group>
+                                    
+                </Sticky>         
        
         </div> 
         </Grid.Column>

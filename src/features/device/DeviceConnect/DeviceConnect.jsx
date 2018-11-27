@@ -128,7 +128,8 @@ class DeviceConnect extends Component {
         </Segment>
       <Segment>         
           <Button onClick={this.handleConnect(device)} color="blue" content= "Connect" />         
-          <Button as={Link} to={`/task/${device.id}`} color="yellow"  content="Tasks" />   
+          <Button as={Link} to={`/task/${device.id}`} color="yellow"  content="Tasks" /> 
+          <Button as={Link} to={`/device/dashboard/${device.id}`} color="green"  content="Dashboard" />   
           <Button onClick={this.props.history.goBack} color="grey" content="Return" />
       </Segment>
         </Segment.Group>

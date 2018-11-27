@@ -10,7 +10,7 @@ import * as types from '../constants/BlogActionTypes';
 //  yield put({ type: 'GET_BLOGS_SUCCESS', blogs }) ;
 
 export function* getBlogsSaga({ payload }) {
-  console.log("from getBlogsSaga call API getAllBlogs") ;
+  // console.log("from getBlogsSaga call API getAllBlogs") ;
   try {  
    
   /*  const response = yield call(getAllBlogs, payload);
@@ -64,7 +64,7 @@ export function* addBlogSaga({ text }) {
 
 
 export function* editBlogSaga({ Blog }) {
-   console.log("from editBlogsage call API updateBlog: ", Blog) ;
+   // console.log("from editBlogsage call API updateBlog: ", Blog) ;
    try {  
     const edBlog = yield call(updateBlog, Blog );
     yield [      
@@ -81,7 +81,7 @@ export function* completeBlogSaga({ Blog }) {
   Blog.completed = !Blog.completed; 
   
   // call the API passing the new parameters 
-  console.log("from completeBlogsaga call API updateBlog: ", Blog) ;
+  // console.log("from completeBlogsaga call API updateBlog: ", Blog) ;
   
  // remove try hiding errors 
   try {  
@@ -97,7 +97,7 @@ export function* completeBlogSaga({ Blog }) {
 }
 
 export function* deleteBlogSaga({ Blog }) {
-   console.log("from deleteBlogsaga call API deleteBlog: ", Blog) ;
+   // console.log("from deleteBlogsaga call API deleteBlog: ", Blog) ;
    try {  
     const newBlog = yield call(deleteBlog, Blog );
     yield [      
@@ -124,7 +124,7 @@ export function* getBlogSaga({ id }) {
 
 
 export function* newBlogSaga({ blog }) {
-   console.log("from newBlogSaga call API addNewBlog and pass: ", blog) ;
+   // console.log("from newBlogSaga call API addNewBlog and pass: ", blog) ;
    try {  
     const newblog = yield call( addNewBlog, blog );
     yield [      
@@ -136,11 +136,11 @@ export function* newBlogSaga({ blog }) {
 }
 
 export function* updateBlogSaga({ id, blog }) {
-   console.log("from updateBlogsaga call API updateBlog: ", blog) ;
-   console.log("from updateBlogsaga id = ", id ) ;
+   // console.log("from updateBlogsaga call API updateBlog: ", blog) ;
+   // console.log("from updateBlogsaga id = ", id ) ;
    try {  
     const edBlog = yield call(updateBlog, id, blog );
-    console.log("from updateBlogsaga response = ", edBlog ) ;
+    // console.log("from updateBlogsaga response = ", edBlog ) ;
     yield [      
       put({ type: types.UPDATE_BLOG_SUCCESS, edBlog }),
     ];

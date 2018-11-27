@@ -5,6 +5,7 @@ import { Menu, Container } from 'semantic-ui-react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import SignedOutMenu from '../Menus/SignedOutMenu';
 import SignedInMenu from '../Menus/SignedInMenu';
+import DeviceMenu from '../Menus/DeviceMenu';
 import { openModal } from '../../modals/modalActions'
 import styles from './navbar.css' ;
 
@@ -15,7 +16,8 @@ const actions = {
 
 const mapState = (state) => ({
   auth: state.firebase.auth,
-  profile: state.firebase.profile
+  profile: state.firebase.profile,
+  activeDevice: state.activeDevice
 })
 
 class NavBar extends Component {
@@ -34,7 +36,7 @@ class NavBar extends Component {
   };
 
   render() {
-    const { auth, profile} = this.props;
+    const { auth, profile, activeDevice} = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty
     return (
       <Menu inverted fixed="top" className={styles.fixedmenu}>
@@ -51,7 +53,9 @@ class NavBar extends Component {
           <Menu.Item as={NavLink} to="/devices" name="Devices" />}
           <Menu.Item as={NavLink} to="/device/stats" name="Stats" />
           <Menu.Item as={NavLink} to="/device/table" name="Table" />
+          <Menu.Item as={NavLink} to="/device/chart" name="Chart" />
           <Menu.Item as={NavLink} to="/gallery" name="Gallery" />
+          <Menu.Item as={NavLink} to="/todos" name="Project" />
           {/* {authenticated &&
           <Menu.Item>
             <Button
@@ -85,9 +89,15 @@ class NavBar extends Component {
 
           {authenticated ? ( 
             <SignedInMenu auth={auth} profile={profile} signOut={this.handleSignOut} />
+            
           ) : (
             <SignedOutMenu register={this.handleRegister} signIn={this.handleSignIn} />
           )}
+
+          { activeDevice.connected &&  
+          (<DeviceMenu auth={auth} activeDevice={activeDevice} signOut={this.handleSignOut} />) 
+          }
+
         </Container>
       </Menu>
     );

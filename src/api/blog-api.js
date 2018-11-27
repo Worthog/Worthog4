@@ -23,7 +23,7 @@ export function getAllBlogs() {
       });
     }
   });
-  console.log ("token = ", token);
+  // console.log ("token = ", token);
 
   // var config = {
   //   headers: {'Authorization': "bearer " + token}

@@ -1,99 +1,254 @@
 import React, { Component } from 'react';
-import { Grid, Button } from 'semantic-ui-react';
+import { Grid, Segment, Item, Button, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom' ;
+import { bindActionCreators } from 'redux'
+import * as TaskActions from '../DeviceTasks/taskActions';
+
+import { withFirestore } from 'react-redux-firebase';
+import ReactDOM from "react-dom";
+import Chart from "react-google-charts";
+
+
 import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
-// import { deleteEvent } from '../eventActions';
-import DeviceList from '../DeviceList/DeviceList';
+
+
 import LoadingComponent from '../../../app/layout/LoadingComponent';
-// import EventActivity from '../EventActivity/EventActivity';
 
-// ** Remove the delete event function 
-// ** ALSO removed ACTIONS from mapstate
+function mapStateToProps(state, ownProps) {
 
-const mapState = state => ({
-  devices: state.firestore.ordered.devices,
-});
+  return {   
+	  device: state.activeDevice,
+    loading: state.blog.loading, 
+    
+  }
+}
 
-// const actions = {
-//   deleteEvent
-// };
+function isNumber(obj) {
+  return obj!== undefined && typeof(obj) === 'number' && !isNaN(obj);
+}
+
+
+const options = {
+  width: 500,
+  height: 200,
+  redFrom: 40,
+  redTo: 50,
+  yellowFrom: 30,
+  yellowTo: 40,
+  minorTicks: 10,
+  max: 50,
+  majorTicks: [ 0, 10, 20, 30, 40, 50 ]
+};
+
+const getRandomNumber = () => {
+  return Math.random() * 100;
+};
+
+
+
 
 class DeviceDashboard extends Component {
-//   handleDeleteEvent = eventId => () => {
-//     this.props.deleteEvent(eventId);
-//   };
+
+  state = {
+    networkSpeed: 1,
+    temp: 20,
+    cpu: 55,
+    lastupdate: ""
+  };
+
+
+  intervalID = null;
+
+  getData = () => {
+    let tempstr = "Temp" + String.fromCharCode(8451);
+    return [
+      ["Label", "Value"],
+      [tempstr , this.state.temp],
+      ["CPU", this.state.cpu],
+      ["Network", this.state.networkSpeed]
+    ];
+  };
+
+  handleGetTemp = (device) => {
+    console.log ("from handlegettemp : device= ", device) ;    
+    const task = "tempvalue"      
+    this.props.actions.getTempRequest(device, task); 
+   
+      // var d = new Date();
+      // var timestr = d.toLocaleTimeString() ;
+      // let deviceName = this.props.device.name ; 
+      let deviceName = device.name ; 
+      let d = new Date(); 
+      let timestr = d.toLocaleTimeString() ;
+
+      console.log( "Timer function fired @ ", timestr , "device = " , deviceName ) ;
+      this.setState(state => {
+       
+        return {
+          ...state,
+          networkSpeed: getRandomNumber(),
+          cpu: getRandomNumber(),
+          temp: this.props.device.temperature, 
+          lastupdate : timestr
+                    
+
+        };
+      });
+      
+  }
+
+
+// lets try replacing  temp: getRandomNumber() with device.temperature
+// try  let shorttemp = device.temperature.toFixed(2) ; 
+
+async componentDidMount() {
+  const {firestore, match} = this.props;
+  var d = new Date();
+  var timestr = d.toLocaleTimeString() ;
+  await firestore.setListener(`device/dashboard/${match.params.id}`);
+   this.intervalID = setInterval(() => {
+      this.setState(state => {
+        d = new Date(); 
+        timestr = d.toLocaleTimeString() ;
+        return {
+          ...state,
+          networkSpeed: getRandomNumber(),
+          cpu: getRandomNumber(),
+          temp: this.props.device.temperature, 
+          lastupdate : timestr 
+
+        };
+      });
+    }, 600000);
+}
+
+
+async componentWillUnmount() {
+  const {firestore, match} = this.props;
+  await firestore.unsetListener(`device/dashboard/${match.params.id}`);
+  if (this.intervalID === null) return;
+  clearInterval(this.intervalID);
+}
+
 
   render() {
-    const { devices } = this.props;
-    if (!isLoaded(devices) || isEmpty(devices)) return <LoadingComponent inverted={true} />;
+    
+    const {device} = this.props
+    console.log({device}) ;
+
+
+    // let shorttemp = device.temperature.toFixed(2) ; 
+   
+    let shorttemp = "" ; 
+
+    if (isNumber(device.temperature) && (device.temperature > 0) ) {
+      shorttemp = device.temperature.toFixed(2) ; 
+    } 
+    else {
+      shorttemp = "N/A" ;  
+    }
 
     return (
       <Grid>
         <Grid.Column width={10}>
-          <DeviceList devices={devices} />
+          {/* <DeviceList devices={devices} /> */}
+          <Segment>
+          <Item.Group>
+            <Item>             
+              <Item.Content>
+                <Item.Header>{device.name} Dashboard </Item.Header>                                                 
+              </Item.Content>
+            </Item>
+            <Item>             
+              <Item.Content>                
+                <Label as='a' tag>
+                Temperature :  {shorttemp}  &#8451;                  
+                </Label>
+                
+                {/* <Label as='a' tag>
+                Temperature :  {this.state.temp.toFixed(2)}  &#8451;                  
+                </Label>  */}
+
+
+                Last Update @ {this.state.lastupdate}   
+                <Button onClick={() => this.handleGetTemp (device) } 
+            color="green"
+            floated="right" >Refresh</Button>                                  
+              </Item.Content>
+            </Item>
+          </Item.Group>
+        </Segment>
+        <Segment>                
+                <h4>Temperature &#8451; </h4>  
+         
+                <Chart
+                  chartType="Gauge"
+                  width="100%"
+                  height="400px"
+                  data={this.getData()}
+                  options={options}
+                />
+                                                                            
+             </Segment>             
+
+      <Segment>                   
+          <Button onClick={this.props.history.goBack} color="grey" content="Return" /> 
+          
+      </Segment>   
+
+
         </Grid.Column>
         <Grid.Column width={6}>
           <h4>DeviceDashboard Page</h4>
-          {/* <Button as={Link} to={`/device/stats`} color="grey"  content="Stats" />   */}
-          <Button as={Link} to={`/addDevice`} color="grey"  content="Add Device" />  
-
-          <h4>Oct 13</h4>  
-          <p>Lets move the stats and demo buttons from the list item to this page. </p>
+          <p>The conversion to shorttemp was working until I put the
+            fixed function into the component mount, lets remove it for now</p>                   
+          <h4>Google Gauge</h4>  
           <p>
-             Add some new Task actions : Log_task_Request, Log_task_success, Log_task_fail and
-             fetch_tasks.  Might want to change this to Log_Status and Fetch_Status. 
-             
-             Seems to be clearer and it won't interfere with the Task requests. 
-             
-             See the DeviceDashboard Page.  DeviceList Items calls "stats" from the button.
-             This calls the TaskList component. Use the code from the DeviceDashboard to 
-             map the state to the Firestore Tasks collection. 
+             install react-google-charts from :
+                        
+             <a href=" https://react-google-charts.com/gauge-chart" target="_blank" rel="noopener noreferrer"> React Google Charts</a>
             
 
           </p>
-          <h4>ActiveDevice</h4>  
           <p>
-             Convert the activeDeviceReducer to ES6 module version.  On connect assign device status to
-             ActiveDevice State. Aftert comparing the various methods I think the Saga version "Orders.js"
-             is the most concise and logical.  Lets convert ActiveDevicereducer to this method.
-             
-
+          <b>Note: </b> 
+          Demo available at :    
+          <a href="https://codesandbox.io/s/ykzvw2yv3z" target="_blank" rel="noopener noreferrer"> CodeSandBox Google Gauge</a>
+                      
+          </p>
+         <p>
+           Hey had to use  let tempstr = "Temp" + String.fromCharCode(8451); for the gauge
+           title, but it worked.
+           <br/>
+           Could switch to  8457 if we want to show  &#8457;
+           instead of &#8451;. 
+          <br/>
           </p>
           <p>
-          <b>Note:</b> Installed the particle-api-js module, might make the function calls etc. easier to work with.
-          
+           Could call the task Saga using the Action Request, the problem is it logs each request.
+           I don't think that's what we want.  Might use it for now, but would be nice to have another
+           Action, that simply gets the device value and updates the gauge.
+           
+          <br/>
+          Where do we get the state?  MapStatetoprops - device
+         
           </p>
-          <p>
-          Cannot get Axios to work, might have to switch to invoking the http methods by hand. 
-          </p>
-          <p>Before we fart around with fancy toggle buttons lets just wire up the connect 
-            button to connect to the device.  Now we have to decide? Do we want to set up Saga and import 
-            all the code & setup from the old version? Is this the direction we want to go in?  Apparently the 
-            benefit to Saga is the testability.  Is it worth the effort?  Undecided!  Once again, pick a horset and
-            ride it till it drops. The biggest benefit might come from importing the blog and the todo list, since these are already
-            set up to use Saga.  Keep in mind you have the D:/react/revents version to fall back on
-            if you get in too deep. 
-          </p>
-          <p> After adding a new device using the DeviceForm, the routing should
-              return to the device list page instead of the events list page. 
-              see DeviceForm - history push /devices</p>
-            <p>Now we need to change the "view" button to a "Manage" button and allow the user to connect
-                to the device. </p>
-            <p>The form does not repopulate from "manage" button, perhaps it's getting the state by id instead 
-                of device id? </p>
-             <p>Changed the "devicelistItem" manage button to use "id" instead of deviceid and now the form is 
-                 populating.  Guess the Router and the form ned to be in sync. </p>  
-
-                           
-            <p>Do not use a form for the Device Functions page. Forms post everything in one big batch.  I would
-                rather have each function controlled individually, basically a list of components. </p>
         </Grid.Column>
       </Grid>
     );
   }
 }
 
-export default connect(mapState)(
-  firestoreConnect([{ collection: 'devices' }])(DeviceDashboard)
+const mapDispatchToProps = dispatch => {
+  return {      
+      actions: bindActionCreators(TaskActions, dispatch)
+  };
+};
+
+
+
+export default  withFirestore(
+  connect(mapStateToProps, mapDispatchToProps )(DeviceDashboard)
 );
+

@@ -12,8 +12,13 @@ import {
 } from 'revalidate';
 import * as BlogActions from '../blog-actions';
 import TextInput from '../../../app/common/form/TextInput';
-import TextBox from '../../../app/common/form/TextBox';
+// import TextBox from '../../../app/common/form/TextBox';
 import DateInput from '../../../app/common/form/DateInput';
+import ReactMarkdown from 'react-markdown' ;
+import Editor from './editor' ;
+import CodeBlock from './code-block' ;
+import ReactMDE from 'redux-forms-markdown-editor';
+
 // import _ from 'lodash';
 
 // const mapState = (state, ownProps) => {
@@ -32,7 +37,11 @@ import DateInput from '../../../app/common/form/DateInput';
   
 // };
 
-
+const initialSource = `
+### Preview - window 
+This is not working because of the onChange function
+see features/blog/blogedit/blogedit.jsx
+`
 
 const validate = combineValidators({
   title: isRequired({ message: 'A title is required' }), 
@@ -47,15 +56,30 @@ const validate = combineValidators({
 });
 
 
-class BlogForm extends Component {
+class BlogEdit extends Component {
 
-  
+  constructor(props) {
+    super(props);
+    this.handleMarkdownChange = this.handleMarkdownChange.bind(this);
+    this.state = {
+      value: 'Type some *markdown* here!' ,
+      markdownSrc: initialSource,
+      htmlMode: 'raw'
+    };
+  }
+
+  // this.handleChange = this.handleChange.bind(this);
+
+  // state = {
+  //   markdownSrc: initialSource,
+  //   htmlMode: 'raw'
+  // }
+ 
   componentDidMount() {   
 
-    console.log("Blog Form * Note new react router version requires match");
+    console.log("BlogEdit");
 
-    console.log ("id = " ,  this.props.match.params.id ) ; 	
-  
+      
     var id = this.props.match.params.id ;	
   
     let blogObject = {}; 
@@ -88,7 +112,20 @@ class BlogForm extends Component {
   //   await firestore.unsetListener(`devices/${match.params.id}`);
   // }
  
-   
+  handleMarkdownChange(e) {
+    // alert("MD Changed"); 
+    // this.setState({markdownSrc: evt.target.value})
+   // this.setState({markdownSrc: evt.target.textContent})
+
+    if (e !== undefined) {
+      console.log("on Change e.target =  ", e.target) ;
+      this.setState({markdownSrc: e.target.textContent})
+    }
+
+  }
+  // handleControlsChange(mode) {
+  //   this.setState({htmlMode: mode})
+  // } 
 
   onFormSubmit = values => {
     
@@ -108,9 +145,9 @@ class BlogForm extends Component {
     return (
       <Grid>
         
-        <Grid.Column width={10}>
+        <Grid.Column width={8}>
           <Segment>
-            <Header sub color="teal" content="Blog" />
+            <Header sub color="teal" content="BlogEdit (markdown version)" />
             <Form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
               <label>Title</label>              
               <Field
@@ -126,15 +163,16 @@ class BlogForm extends Component {
                 component={TextInput}
                 placeholder="Written by:"
               />
-
-
+           
              <label>Description</label> 
               <Field
                 name="article"
                 type="text"
-                component={TextBox}
+                component={ReactMDE}
                 rows={3}
                 placeholder="A few words ..."
+                // onChange={this.handleMarkdownChange}
+                // defaultValue={this.state.markdownSrc}
               />
              
               <label>Date</label>  
@@ -161,6 +199,18 @@ class BlogForm extends Component {
               
             </Form>
           </Segment>
+        </Grid.Column>
+        <Grid.Column width={8}>
+        <Segment>
+          
+          <ReactMarkdown
+            className="result"
+            source={this.state.markdownSrc}
+            skipHtml={this.state.htmlMode === 'skip'}
+            escapeHtml={this.state.htmlMode === 'escape'}
+            renderers={{code: CodeBlock}}
+          />
+        </Segment>
         </Grid.Column>
       </Grid>
     );
@@ -191,8 +241,8 @@ function mapStateToProps(state, ownProps) {
 
 export default 
   connect(mapStateToProps, mapDispatchToProps )(
-    reduxForm({ form: 'blogForm', enableReinitialize: true, validate })(
-      BlogForm
+    reduxForm({ form: 'blogEdit', enableReinitialize: true, validate })(
+      BlogEdit
     )
   )
 
